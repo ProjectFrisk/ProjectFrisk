@@ -7,19 +7,23 @@
     
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Press+Start+2P&family=VT323&display=swap" rel="stylesheet">
+    
     <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-8693042848647942" crossorigin="anonymous"></script>
     
     <style>
-        /* Base Reset */
+        /* Base Reset & Retro Defaults */
         * {
             margin: 0;
             padding: 0;
             box-sizing: border-box;
-            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+            image-rendering: pixelated;
         }
 
         body {
-            background-color: #050505;
+            background-color: #000000;
             color: #ffffff;
             display: flex;
             justify-content: center;
@@ -27,96 +31,96 @@
             min-height: 100vh;
             overflow: hidden;
             position: relative;
+            font-family: 'VT323', monospace;
+            font-size: 1.4rem;
         }
 
-        /* Animated Background Blobs */
-        .blob {
+        /* Decorative Background Pixel Noise (Matching Logo Theme) */
+        .pixel-bg-element {
             position: absolute;
-            filter: blur(80px);
+            background: #222222;
+            width: 12px;
+            height: 12px;
             z-index: 0;
-            opacity: 0.6;
-            animation: moveBlobs 10s infinite alternate ease-in-out;
+            opacity: 0.7;
         }
+        .p1 { top: 15%; left: 10%; box-shadow: 24px 12px #111, -12px 36px #222; }
+        .p2 { top: 75%; left: 15%; box-shadow: 12px -24px #333, 48px 12px #111; }
+        .p3 { top: 25%; right: 12%; box-shadow: -36px 48px #222, 12px 12px #333; }
+        .p4 { bottom: 20%; right: 20%; box-shadow: -24px -12px #111; }
 
-        .blob-1 {
-            width: 400px;
-            height: 400px;
-            background: linear-gradient(135deg, #ff007f, #6b00ff);
-            top: -10%;
-            left: -10%;
-            border-radius: 50%;
-        }
-
-        .blob-2 {
-            width: 350px;
-            height: 350px;
-            background: linear-gradient(135deg, #00f2fe, #4facfe);
-            bottom: -10%;
-            right: -10%;
-            border-radius: 50%;
-            animation-delay: -5s;
-        }
-
-        @keyframes moveBlobs {
-            0% { transform: translate(0, 0) scale(1); }
-            100% { transform: translate(30px, 30px) scale(1.1); }
-        }
-
-        /* Glassmorphism Container */
-        .glass-card {
+        /* Retro RPG Main Panel */
+        .retro-card {
             position: relative;
             z-index: 1;
-            background: rgba(255, 255, 255, 0.03);
-            backdrop-filter: blur(16px);
-            -webkit-backdrop-filter: blur(16px);
-            border: 1px solid rgba(255, 255, 255, 0.08);
-            border-radius: 24px;
-            padding: 50px 30px;
+            background: #000000;
+            border: 4px solid #ffffff;
+            padding: 40px 24px;
             text-align: center;
-            width: 90%;
-            max-width: 500px;
+            width: 92%;
+            max-width: 480px;
             max-height: 95vh;
             overflow-y: auto;
-            box-shadow: 0 25px 50px rgba(0, 0, 0, 0.5);
-            animation: float 6s ease-in-out infinite;
+            box-shadow: 0 0 0 4px #000000, 0 20px 40px rgba(0,0,0,0.8);
         }
 
-        @media (max-height: 750px) {
-            .glass-card {
-                animation: none;
-            }
-        }
-
-        .glass-card::-webkit-scrollbar {
+        .retro-card::-webkit-scrollbar {
             display: none;
         }
 
+        /* Inline SVG Pixel Hearts Logo Group */
+        .logo-hearts-container {
+            display: flex;
+            justify-content: center;
+            gap: 25px;
+            margin-bottom: 20px;
+        }
+
+        .pixel-heart {
+            shape-rendering: crispEdges;
+            transition: transform 0.2s ease;
+        }
+        
+        .retro-card:hover .pixel-heart {
+            transform: scale(1.05);
+        }
+
+        .heart-yellow { color: #d4b100; filter: drop-shadow(0 0 4px rgba(212,177,0,0.5)); }
+        .heart-red { color: #e60000; filter: drop-shadow(0 0 4px rgba(230,0,0,0.5)); }
+        .heart-purple { color: #8000ff; filter: drop-shadow(0 0 4px rgba(128,0,255,0.5)); }
+
         /* Typography */
         h1 {
-            font-size: 3.2rem;
-            font-weight: 800;
+            font-family: 'Press Start 2P', monospace;
+            font-size: 1.6rem;
+            line-height: 1.4;
+            margin-bottom: 8px;
+            color: #ffffff;
             letter-spacing: -1px;
-            margin-bottom: 10px;
-            background: linear-gradient(to right, #fff, #a1a1aa);
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-            text-shadow: 0 0 20px rgba(255, 255, 255, 0.1);
+        }
+
+        .subtitle {
+            font-family: 'Press Start 2P', monospace;
+            font-size: 0.8rem;
+            color: #bcbcbc;
+            margin-bottom: 35px;
+            text-transform: uppercase;
         }
 
         h2 {
-            font-size: 2rem;
+            font-family: 'Press Start 2P', monospace;
+            font-size: 1.3rem;
             margin-bottom: 15px;
-            color: #fff;
+            color: #ffffff;
         }
 
         p {
-            font-size: 1.1rem;
-            color: #a1a1aa;
-            margin-bottom: 30px;
-            line-height: 1.5;
+            color: #bcbcbc;
+            margin-bottom: 25px;
+            line-height: 1.4;
         }
 
-        /* Navigation Cards List Setup */
+        /* Retro Navigation Cards */
         .cards-container {
             display: flex;
             flex-direction: column;
@@ -127,193 +131,209 @@
         .nav-card {
             display: flex;
             align-items: center;
-            background: rgba(255, 255, 255, 0.02);
-            border: 1px solid rgba(255, 255, 255, 0.06);
-            border-radius: 18px;
-            padding: 18px;
+            background: #000000;
+            border: 3px solid #555555;
+            padding: 16px;
             text-decoration: none;
-            color: #fff;
+            color: #ffffff;
             text-align: left;
-            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+            transition: all 0.2s steps(4);
         }
 
         .nav-card:hover {
-            background: rgba(255, 255, 255, 0.06);
-            border-color: rgba(255, 255, 255, 0.15);
-            transform: translateY(-3px);
-            box-shadow: 0 12px 24px rgba(0, 0, 0, 0.3);
+            border-color: #ffffff;
+            background: #111111;
+            transform: translateY(-2px);
         }
 
         .nav-card-icon {
-            width: 48px;
-            height: 48px;
-            background: linear-gradient(135deg, #6b00ff, #ff007f);
-            border-radius: 14px;
+            width: 44px;
+            height: 44px;
+            background: #222222;
+            border: 2px solid #555555;
             display: flex;
             justify-content: center;
             align-items: center;
-            font-size: 1.3rem;
+            font-size: 1.2rem;
             flex-shrink: 0;
-            box-shadow: 0 4px 15px rgba(107, 0, 255, 0.3);
+        }
+
+        .nav-card:hover .nav-card-icon {
+            background: #ffffff;
+            color: #000000;
+            border-color: #ffffff;
         }
 
         .nav-card-info {
             flex-grow: 1;
-            padding: 0 16px;
+            padding: 0 14px;
         }
 
         .nav-card-info h3 {
-            font-size: 1.2rem;
-            font-weight: 700;
-            margin-bottom: 3px;
-            color: #fff;
+            font-family: 'Press Start 2P', monospace;
+            font-size: 0.85rem;
+            margin-bottom: 5px;
+            color: #ffffff;
         }
 
         .nav-card-info p {
-            font-size: 0.88rem;
-            color: #a1a1aa;
+            font-size: 1.1rem;
+            color: #bcbcbc;
             margin-bottom: 0;
-            line-height: 1.4;
+            line-height: 1.3;
         }
 
         .nav-card-arrow {
-            color: #4b4b52;
+            color: #555555;
             font-size: 0.9rem;
-            transition: transform 0.3s, color 0.3s;
         }
 
         .nav-card:hover .nav-card-arrow {
-            color: #fff;
-            transform: translateX(4px);
+            color: #ffffff;
+            transform: translateX(2px);
         }
 
-        /* Buttons (For Inner Pages) */
+        /* Blocky Action Buttons */
         .btn {
             display: inline-block;
-            padding: 16px 45px;
-            font-size: 1.1rem;
-            font-weight: bold;
-            border-radius: 30px;
+            padding: 14px 30px;
+            font-family: 'Press Start 2P', monospace;
+            font-size: 0.85rem;
             text-decoration: none;
-            transition: all 0.3s ease;
             cursor: pointer;
-            border: none;
+            border: 3px solid #ffffff;
+            background: #000000;
+            color: #ffffff;
             width: 100%;
-            max-width: 250px;
+            max-width: 280px;
             margin: 10px auto 20px auto;
+            transition: all 0.1s ease;
         }
 
-        .btn-primary {
-            color: #fff;
-            background: linear-gradient(135deg, #6b00ff, #ff007f);
-            animation: pulseGlow 2s infinite;
+        .btn:hover {
+            background: #ffffff;
+            color: #000000;
         }
 
-        .btn-primary:hover {
-            transform: scale(1.05);
-            background: linear-gradient(135deg, #7b1aff, #ff1a8c);
-        }
-
-        @keyframes pulseGlow {
-            0% { box-shadow: 0 0 15px rgba(107, 0, 255, 0.4); }
-            50% { box-shadow: 0 0 30px rgba(255, 0, 127, 0.7); }
-            100% { box-shadow: 0 0 15px rgba(107, 0, 255, 0.4); }
-        }
-
-        /* Footer & Social Icons */
-        footer {
-            margin-top: 20px;
-            display: flex;
-            justify-content: center;
+        /* Back Navigation String Link */
+        .btn-back {
+            background: transparent;
+            color: #bcbcbc;
+            border: none;
+            font-family: 'Press Start 2P', monospace;
+            font-size: 0.75rem;
+            text-decoration: none;
+            cursor: pointer;
+            margin-bottom: 25px;
+            display: inline-flex;
             align-items: center;
+            gap: 8px;
         }
 
-        .social-icons {
-            display: flex;
-            gap: 30px;
+        .btn-back:hover {
+            color: #ffff00;
         }
 
-        .social-icons a {
-            color: #a1a1aa;
-            font-size: 1.8rem;
-            transition: all 0.3s ease;
-        }
-
-        .social-icons a.discord:hover {
-            color: #5865F2;
-            transform: translateY(-5px);
-            filter: drop-shadow(0 0 10px rgba(88, 101, 242, 0.8));
-        }
-
-        .social-icons a.youtube:hover {
-            color: #FF0000;
-            transform: translateY(-5px);
-            filter: drop-shadow(0 0 10px rgba(255, 0, 0, 0.8));
-        }
-
-        /* Tutorial List on DNS Page */
+        /* Tutorial/Instruction Container */
         .tutorial-box {
-            background: rgba(0, 0, 0, 0.3);
-            border-radius: 15px;
-            padding: 25px;
+            background: #000000;
+            border: 3px dashed #555555;
+            padding: 20px;
             text-align: left;
-            margin-top: 10px;
-            border: 1px solid rgba(255, 255, 255, 0.05);
+            margin-top: 15px;
         }
 
         .tutorial-box h3 {
+            font-family: 'Press Start 2P', monospace;
+            font-size: 0.85rem;
             margin-bottom: 15px;
-            font-size: 1.2rem;
-            color: #fff;
+            color: #ffff00;
             text-align: center;
         }
 
         .tutorial-box ol {
-            color: #a1a1aa;
+            color: #bcbcbc;
             padding-left: 20px;
-            line-height: 1.8;
-            font-size: 1rem;
+            line-height: 1.6;
         }
 
         .tutorial-box li span {
-            color: #fff;
+            color: #ffffff;
             font-weight: bold;
+            text-decoration: underline;
         }
 
-        /* Back Button */
-        .btn-back {
-            background: transparent;
-            color: #a1a1aa;
-            border: none;
-            font-size: 1rem;
-            text-decoration: none;
-            cursor: pointer;
-            margin-bottom: 20px;
-            display: inline-flex;
-            align-items: center;
-            gap: 8px;
-            transition: color 0.3s;
+        /* Footer & Social Hubs */
+        footer {
+            margin-top: 25px;
+            border-top: 2px dashed #333333;
+            padding-top: 20px;
         }
 
-        .btn-back:hover {
-            color: #fff;
+        .footer-note {
+            font-family: 'Press Start 2P', monospace;
+            font-size: 0.65rem;
+            color: #555555;
+            margin-bottom: 15px;
         }
 
-        /* Utility Hide Class */
+        .social-icons {
+            display: flex;
+            justify-content: center;
+            gap: 25px;
+        }
+
+        .social-icons a {
+            color: #bcbcbc;
+            font-size: 1.5rem;
+            transition: color 0.1s ease;
+        }
+
+        .social-icons a:hover {
+            color: #ffffff;
+        }
+
+        /* Setup Utility Classes */
         .hidden {
             display: none !important;
         }
-
     </style>
 </head>
 <body>
 
-    <div class="blob blob-1"></div>
-    <div class="blob blob-2"></div>
+    <div class="pixel-bg-element p1"></div>
+    <div class="pixel-bg-element p2"></div>
+    <div class="pixel-bg-element p3"></div>
+    <div class="pixel-bg-element p4"></div>
 
-    <div id="view-home" class="glass-card">
+    <div id="view-home" class="retro-card">
+        
+        <div class="logo-hearts-container">
+            <svg class="pixel-heart heart-yellow" viewBox="0 0 9 8" width="36" height="32" fill="currentColor">
+                <rect x="1" y="0" width="2" height="1"/><rect x="6" y="0" width="2" height="1"/>
+                <rect x="0" y="1" width="4" height="1"/><rect x="5" y="1" width="4" height="1"/>
+                <rect x="0" y="2" width="9" height="2"/>
+                <rect x="1" y="4" width="7" height="1"/><rect x="2" y="5" width="5" height="1"/>
+                <rect x="3" y="6" width="3" height="1"/><rect x="4" y="7" width="1" height="1"/>
+            </svg>
+            <svg class="pixel-heart heart-red" viewBox="0 0 9 8" width="36" height="32" fill="currentColor">
+                <rect x="1" y="0" width="2" height="1"/><rect x="6" y="0" width="2" height="1"/>
+                <rect x="0" y="1" width="4" height="1"/><rect x="5" y="1" width="4" height="1"/>
+                <rect x="0" y="2" width="9" height="2"/>
+                <rect x="1" y="4" width="7" height="1"/><rect x="2" y="5" width="5" height="1"/>
+                <rect x="3" y="6" width="3" height="1"/><rect x="4" y="7" width="1" height="1"/>
+            </svg>
+            <svg class="pixel-heart heart-purple" viewBox="0 0 9 8" width="36" height="32" fill="currentColor">
+                <rect x="1" y="0" width="2" height="1"/><rect x="6" y="0" width="2" height="1"/>
+                <rect x="0" y="1" width="4" height="1"/><rect x="5" y="1" width="4" height="1"/>
+                <rect x="0" y="2" width="9" height="2"/>
+                <rect x="1" y="4" width="7" height="1"/><rect x="2" y="5" width="5" height="1"/>
+                <rect x="3" y="6" width="3" height="1"/><rect x="4" y="7" width="1" height="1"/>
+            </svg>
+        </div>
+
         <h1>Project Frisk</h1>
-        <p>Experience seamless iOS sideloading.</p>
+        <div class="subtitle">iOS Sideloader</div>
         
         <div class="cards-container">
             
@@ -348,71 +368,78 @@
         </script>
 
         <footer>
+            <div class="footer-note">Made in 2026</div>
             <div class="social-icons">
-                <a href="YOUR_DISCORD_LINK" target="_blank" class="discord"><i class="fa-brands fa-discord"></i></a>
-                <a href="YOUR_YOUTUBE_LINK" target="_blank" class="youtube"><i class="fa-brands fa-youtube"></i></a>
+                <a href="YOUR_DISCORD_LINK" target="_blank"><i class="fa-brands fa-discord"></i></a>
+                <a href="YOUR_YOUTUBE_LINK" target="_blank"><i class="fa-brands fa-youtube"></i></a>
             </div>
         </footer>
     </div>
 
-    <div id="view-dns" class="glass-card hidden">
-        <a href="#home" class="btn-back"><i class="fa-solid fa-arrow-left"></i> Back</a>
+    <div id="view-dns" class="retro-card hidden">
+        <a href="#home" class="btn-back"><i class="fa-solid fa-arrow-left"></i> [ Back ]</a>
         
         <h2>DNS Setup</h2>
-        <p>Install the Project Frisk DNS profile to block Apple's revoke servers and keep your apps running.</p>
+        <p>Install the Project Frisk DNS configuration matrix to bypass system certificate revokes safely.</p>
         
-        <button onclick="window.open('https://www.mediafire.com/file/htf5xdb9tbn8izi/ProjectFriskDNS.mobileconfig/file', '_blank')" class="btn btn-primary">
-            <i class="fa-solid fa-download"></i> Install Profile
+        <button onclick="window.open('https://www.mediafire.com/file/htf5xdb9tbn8izi/ProjectFriskDNS.mobileconfig/file', '_blank')" class="btn">
+            INSTALL PROFILE
         </button>
 
         <div class="tutorial-box">
             <h3>How to Install</h3>
             <ol>
-                <li>Click the button above to download the file from MediaFire.</li>
-                <li>Tap <span>Allow</span> when your device prompts you.</li>
-                <li>Open your device <span>Settings</span> app.</li>
-                <li>Tap <span>Profile Downloaded</span> near the top.</li>
-                <li>Tap <span>Install</span> in the top right corner.</li>
+                <li>Click the configuration button above to clear MediaFire.</li>
+                <li>Tap <span>Allow</span> when the system warning drops.</li>
+                <li>Open your native iOS <span>Settings</span> dashboard.</li>
+                <li>Tap <span>Profile Downloaded</span> near the header row.</li>
+                <li>Press <span>Install</span> in the top-right terminal corner.</li>
             </ol>
         </div>
+        
+        <footer>
+            <div class="footer-note">Made in 2026</div>
+        </footer>
     </div>
 
-    <div id="view-apps" class="glass-card hidden">
-        <a href="#home" class="btn-back"><i class="fa-solid fa-arrow-left"></i> Back</a>
+    <div id="view-apps" class="retro-card hidden">
+        <a href="#home" class="btn-back"><i class="fa-solid fa-arrow-left"></i> [ Back ]</a>
         
         <h2>App Store</h2>
-        <p>Our tailored repository of premium apps, tweaks, and side-loadable tools is launching soon!</p>
+        <p>Our tailored repository of custom system applications, modded binaries, and utilities is preparing for execution.</p>
+        
         <div class="tutorial-box" style="text-align: center;">
-            <p style="margin-bottom: 0;">Stay tuned for updates on our Discord community server.</p>
+            <p style="margin-bottom: 0; color: #ffff00;">Check back soon or monitor logs inside our active Discord channel.</p>
         </div>
+        
+        <footer>
+            <div class="footer-note">Made in 2026</div>
+        </footer>
     </div>
 
     <script>
         function handleRouting() {
             const hash = window.location.hash;
             
-            // Views
             const homeView = document.getElementById('view-home');
             const dnsView = document.getElementById('view-dns');
             const appsView = document.getElementById('view-apps');
             
-            // Hide everything first
+            // Terminate visible tracks
             homeView.classList.add('hidden');
             dnsView.classList.add('hidden');
             appsView.classList.add('hidden');
             
-            // Route conditions logic
+            // Map incoming target views
             if (hash === '#dns') {
                 dnsView.classList.remove('hidden');
             } else if (hash === '#apps') {
                 appsView.classList.remove('hidden');
             } else {
-                // Default fallback if hash is missing or #home
                 homeView.classList.remove('hidden');
             }
         }
 
-        // Listen for URL changes and initialization configurations
         window.addEventListener('hashchange', handleRouting);
         window.addEventListener('load', handleRouting);
     </script>
