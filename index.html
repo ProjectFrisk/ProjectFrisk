@@ -4,9 +4,11 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
     <title>Project Frisk</title>
+    
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-    <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-8693042848647942"
-     crossorigin="anonymous"></script>
+    
+    <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-8693042848647942" crossorigin="anonymous"></script>
+    
     <style>
         /* Base Reset */
         * {
@@ -35,6 +37,7 @@
             opacity: 0.6;
             animation: moveBlobs 10s infinite alternate ease-in-out;
         }
+
         .blob-1 {
             width: 400px;
             height: 400px;
@@ -68,19 +71,24 @@
             -webkit-backdrop-filter: blur(16px);
             border: 1px solid rgba(255, 255, 255, 0.08);
             border-radius: 24px;
-            padding: 60px 40px;
+            padding: 50px 40px;
             text-align: center;
             width: 90%;
             max-width: 500px;
+            max-height: 90vh;
+            overflow-y: auto;
             box-shadow: 0 25px 50px rgba(0, 0, 0, 0.5);
             animation: float 6s ease-in-out infinite;
-            transition: opacity 0.5s ease, transform 0.5s ease;
         }
 
-        @keyframes float {
-            0% { transform: translateY(0px); }
-            50% { transform: translateY(-10px); }
-            100% { transform: translateY(0px); }
+        @media (max-height: 700px) {
+            .glass-card {
+                animation: none;
+            }
+        }
+
+        .glass-card::-webkit-scrollbar {
+            display: none;
         }
 
         /* Typography */
@@ -121,7 +129,7 @@
             border: none;
             width: 100%;
             max-width: 250px;
-            margin: 10px auto;
+            margin: 10px auto 20px auto;
         }
 
         .btn-primary {
@@ -135,17 +143,6 @@
             background: linear-gradient(135deg, #7b1aff, #ff1a8c);
         }
 
-        .btn-secondary {
-            background: rgba(255, 255, 255, 0.1);
-            color: #fff;
-            border: 1px solid rgba(255, 255, 255, 0.2);
-        }
-
-        .btn-secondary:hover {
-            background: rgba(255, 255, 255, 0.2);
-            transform: scale(1.05);
-        }
-
         @keyframes pulseGlow {
             0% { box-shadow: 0 0 15px rgba(107, 0, 255, 0.4); }
             50% { box-shadow: 0 0 30px rgba(255, 0, 127, 0.7); }
@@ -154,7 +151,7 @@
 
         /* Footer & Social Icons */
         footer {
-            margin-top: 40px;
+            margin-top: 20px;
             display: flex;
             justify-content: center;
             align-items: center;
@@ -183,63 +180,56 @@
             filter: drop-shadow(0 0 10px rgba(255, 0, 0, 0.8));
         }
 
+        /* Tutorial List on DNS Page */
+        .tutorial-box {
+            background: rgba(0, 0, 0, 0.3);
+            border-radius: 15px;
+            padding: 25px;
+            text-align: left;
+            margin-top: 10px;
+            border: 1px solid rgba(255, 255, 255, 0.05);
+        }
+
+        .tutorial-box h3 {
+            margin-bottom: 15px;
+            font-size: 1.2rem;
+            color: #fff;
+            text-align: center;
+        }
+
+        .tutorial-box ol {
+            color: #a1a1aa;
+            padding-left: 20px;
+            line-height: 1.8;
+            font-size: 1rem;
+        }
+
+        .tutorial-box li span {
+            color: #fff;
+            font-weight: bold;
+        }
+
         /* Utility Classes for JS swapping */
         .hidden {
             display: none !important;
         }
 
-        /* Modal Overlay */
-        .modal-overlay {
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background: rgba(0, 0, 0, 0.8);
-            backdrop-filter: blur(5px);
-            -webkit-backdrop-filter: blur(5px);
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            z-index: 100;
-            opacity: 0;
-            pointer-events: none;
-            transition: opacity 0.3s ease;
-        }
-
-        .modal-overlay.active {
-            opacity: 1;
-            pointer-events: all;
-        }
-
-        .modal-content {
-            background: rgba(20, 20, 20, 0.9);
-            border: 1px solid rgba(255, 255, 255, 0.1);
-            border-radius: 20px;
-            padding: 40px 30px;
-            width: 90%;
-            max-width: 400px;
-            text-align: center;
-            box-shadow: 0 25px 50px rgba(0, 0, 0, 0.5);
-            transform: translateY(20px);
-            transition: transform 0.3s ease;
-        }
-
-        .modal-overlay.active .modal-content {
-            transform: translateY(0);
-        }
-
-        .modal-content ol {
-            text-align: left;
+        /* Back Button */
+        .btn-back {
+            background: transparent;
             color: #a1a1aa;
-            margin-bottom: 30px;
-            padding-left: 20px;
-            line-height: 1.8;
+            border: none;
+            font-size: 1rem;
+            cursor: pointer;
+            margin-bottom: 20px;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            transition: color 0.3s;
         }
 
-        .modal-content li span {
+        .btn-back:hover {
             color: #fff;
-            font-weight: bold;
         }
 
     </style>
@@ -253,18 +243,17 @@
         <h1>Project Frisk</h1>
         <p>Experience seamless iOS sideloading.</p>
         
-        
-<button onclick="goToView('view-dns')" class="btn btn-primary">Get Started</button>
+        <button onclick="goToView('view-dns')" class="btn btn-primary">Get Started</button>
 
-<ins class="adsbygoogle"
-     style="display:block;margin:20px auto;"
-     data-ad-client="ca-pub-8693042848647942"
-     data-ad-slot="7228483826"
-     data-ad-format="auto"
-     data-full-width-responsive="true"></ins>
-<script>
-(adsbygoogle = window.adsbygoogle || []).push({});
-</script>
+        <ins class="adsbygoogle"
+             style="display:block;margin:20px auto;"
+             data-ad-client="ca-pub-8693042848647942"
+             data-ad-slot="7228483826"
+             data-ad-format="auto"
+             data-full-width-responsive="true"></ins>
+        <script>
+             (adsbygoogle = window.adsbygoogle || []).push({});
+        </script>
 
         <footer>
             <div class="social-icons">
@@ -275,58 +264,36 @@
     </div>
 
     <div id="view-dns" class="glass-card hidden">
-        <h2>Step 1: DNS Setup</h2>
-        <p>To ensure successful sideloading, you need to install the Project Frisk DNS profile. This will block Apple's revoke servers.</p>
+        <button onclick="goToView('view-home')" class="btn-back"><i class="fa-solid fa-arrow-left"></i> Back</button>
         
-        <div id="install-section">
-            <button onclick="downloadProfile()" class="btn btn-primary"><i class="fa-solid fa-download"></i> Install Profile</button>
-        </div>
+        <h2>DNS Setup</h2>
+        <p>Install the Project Frisk DNS profile to block Apple's revoke servers and keep your apps running.</p>
+        
+        <button onclick="window.open('https://www.mediafire.com/file/htf5xdb9tbn8izi/ProjectFriskDNS.mobileconfig/file', '_blank')" class="btn btn-primary">
+            <i class="fa-solid fa-download"></i> Install Profile
+        </button>
 
-        <div id="post-install-section" class="hidden">
-            <button onclick="alert('Next step coming soon!')" class="btn btn-primary">Go to Next Step</button>
-            <button onclick="alert('Support linked here')" class="btn btn-secondary">I'm Having Trouble</button>
-        </div>
-    </div>
-
-    <div id="instruction-modal" class="modal-overlay">
-        <div class="modal-content">
-            <h2>Instructions</h2>
+        <div class="tutorial-box">
+            <h3>How to Install</h3>
             <ol>
-                <li>Tap <span>Allow</span> when prompted to download.</li>
+                <li>Click the button above to download the file from MediaFire.</li>
+                <li>Tap <span>Allow</span> when your device prompts you.</li>
                 <li>Open your device <span>Settings</span> app.</li>
                 <li>Tap <span>Profile Downloaded</span> near the top.</li>
                 <li>Tap <span>Install</span> in the top right corner.</li>
             </ol>
-            <button onclick="closeModal()" class="btn btn-primary">I've Done This</button>
         </div>
     </div>
 
     <script>
         // Switch between Home and DNS views
         function goToView(viewId) {
+            // Hide all views
             document.getElementById('view-home').classList.add('hidden');
-            document.getElementById('view-dns').classList.remove('hidden');
-        }
-
-        // Handle the profile download click
-        function downloadProfile() {
-            // 1. Point this directly to your file name in the same folder
-            window.location.href = 'ProjectFriskDns.mobileconfig';
+            document.getElementById('view-dns').classList.add('hidden');
             
-            // 2. Show the instruction modal
-            document.getElementById('instruction-modal').classList.add('active');
-        }
-
-        // Handle closing the modal and revealing the next steps
-        function closeModal() {
-            // 1. Hide the modal
-            document.getElementById('instruction-modal').classList.remove('active');
-            
-            // 2. Hide the original install button
-            document.getElementById('install-section').classList.add('hidden');
-            
-            // 3. Show the "Next Step" and "Trouble" buttons
-            document.getElementById('post-install-section').classList.remove('hidden');
+            // Show the requested view
+            document.getElementById(viewId).classList.remove('hidden');
         }
     </script>
 
