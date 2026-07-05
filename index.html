@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
     <title>Project Frisk</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <style>
@@ -38,8 +38,8 @@
             width: 400px;
             height: 400px;
             background: linear-gradient(135deg, #ff007f, #6b00ff);
-            top: -100px;
-            left: -100px;
+            top: -10%;
+            left: -10%;
             border-radius: 50%;
         }
 
@@ -47,15 +47,15 @@
             width: 350px;
             height: 350px;
             background: linear-gradient(135deg, #00f2fe, #4facfe);
-            bottom: -50px;
-            right: -100px;
+            bottom: -10%;
+            right: -10%;
             border-radius: 50%;
             animation-delay: -5s;
         }
 
         @keyframes moveBlobs {
             0% { transform: translate(0, 0) scale(1); }
-            100% { transform: translate(50px, 50px) scale(1.1); }
+            100% { transform: translate(30px, 30px) scale(1.1); }
         }
 
         /* Glassmorphism Container */
@@ -86,7 +86,7 @@
             font-size: 3.5rem;
             font-weight: 800;
             letter-spacing: -1px;
-            margin-bottom: 10px;
+            margin-bottom: 15px;
             background: linear-gradient(to right, #fff, #a1a1aa);
             -webkit-background-clip: text;
             -webkit-text-fill-color: transparent;
@@ -97,12 +97,13 @@
             font-size: 1.1rem;
             color: #a1a1aa;
             margin-bottom: 40px;
+            line-height: 1.5;
         }
 
         /* Pulsing Glow Button */
         .btn-start {
             display: inline-block;
-            padding: 15px 45px;
+            padding: 16px 45px;
             font-size: 1.1rem;
             font-weight: bold;
             color: #fff;
@@ -146,7 +147,6 @@
             text-decoration: none;
         }
 
-        /* Neon Hover Effects for Icons */
         .social-icons a.discord:hover {
             color: #5865F2;
             transform: translateY(-5px);
@@ -158,13 +158,47 @@
             transform: translateY(-5px);
             filter: drop-shadow(0 0 10px rgba(255, 0, 0, 0.8));
         }
+
+        /* Mobile Responsiveness */
+        @media (max-width: 600px) {
+            .glass-card {
+                padding: 40px 25px;
+                width: 95%;
+            }
+
+            h1 {
+                font-size: 2.5rem;
+            }
+
+            p {
+                font-size: 1rem;
+                margin-bottom: 30px;
+            }
+
+            .btn-start {
+                padding: 14px 35px;
+                font-size: 1rem;
+            }
+
+            .blob-1 {
+                width: 300px;
+                height: 300px;
+            }
+
+            .blob-2 {
+                width: 250px;
+                height: 250px;
+            }
+        }
     </style>
 </head>
 <body>
 
+    <!-- Animated Background -->
     <div class="blob blob-1"></div>
     <div class="blob blob-2"></div>
 
+    <!-- Main Content inside Glass Card -->
     <div class="glass-card">
         <h1>Project Frisk</h1>
         <p>Unlock the full potential of your device.</p>
