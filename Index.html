@@ -1,0 +1,130 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Project Frisk</title>
+    <!-- Font Awesome for the Discord and YouTube icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        /* Base Reset */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+        }
+
+        body {
+            background-color: #0d0d0f;
+            color: #ffffff;
+            display: flex;
+            flex-direction: column;
+            min-height: 100vh;
+            overflow: hidden;
+        }
+
+        /* Hero Section (Main Content) */
+        main {
+            flex: 1;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            text-align: center;
+            padding: 20px;
+        }
+
+        h1 {
+            font-size: 4rem;
+            font-weight: 800;
+            letter-spacing: -1.5px;
+            margin-bottom: 15px;
+            background: linear-gradient(90deg, #00f2fe 0%, #4facfe 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        p {
+            font-size: 1.2rem;
+            color: #888891;
+            margin-bottom: 40px;
+            max-width: 400px;
+        }
+
+        /* Get Started Button */
+        .btn-start {
+            display: inline-block;
+            padding: 16px 40px;
+            font-size: 1.1rem;
+            font-weight: 600;
+            color: #ffffff;
+            background-color: #007aff;
+            border: none;
+            border-radius: 30px;
+            text-decoration: none;
+            transition: all 0.3s ease;
+            box-shadow: 0 8px 20px rgba(0, 122, 255, 0.3);
+            cursor: pointer;
+        }
+
+        .btn-start:hover {
+            background-color: #006ce0;
+            transform: translateY(-2px);
+            box-shadow: 0 12px 25px rgba(0, 122, 255, 0.4);
+        }
+
+        /* Footer & Social Icons */
+        footer {
+            padding: 30px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .social-icons {
+            display: flex;
+            gap: 25px;
+        }
+
+        .social-icons a {
+            color: #55555c;
+            font-size: 1.8rem;
+            transition: all 0.3s ease;
+            text-decoration: none;
+        }
+
+        /* Hover Colors for Specific Icons */
+        .social-icons a.discord:hover {
+            color: #5865F2; /* Discord Brand Color */
+            transform: scale(1.1);
+        }
+
+        .social-icons a.youtube:hover {
+            color: #FF0000; /* YouTube Brand Color */
+            transform: scale(1.1);
+        }
+    </style>
+</head>
+<body>
+
+    <main>
+        <h1>Project Frisk</h1>
+        <p>Unlock the full potential of your device.</p>
+        <!-- The button is ready to link to your next page -->
+        <a href="#setup" class="btn-start">Get Started</a>
+    </main>
+
+    <footer>
+        <div class="social-icons">
+            <a href="YOUR_DISCORD_LINK_HERE" target="_blank" class="discord" aria-label="Discord">
+                <i class="fa-brands fa-discord"></i>
+            </a>
+            <a href="YOUR_YOUTUBE_LINK_HERE" target="_blank" class="youtube" aria-label="YouTube">
+                <i class="fa-brands fa-youtube"></i>
+            </a>
+        </div>
+    </footer>
+
+</body>
+</html>
