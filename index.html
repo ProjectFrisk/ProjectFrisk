@@ -209,7 +209,7 @@
             font-weight: bold;
         }
 
-        /* Utility Classes for JS swapping */
+        /* Utility Classes for Hash Routing */
         .hidden {
             display: none !important;
         }
@@ -220,9 +220,10 @@
             color: #a1a1aa;
             border: none;
             font-size: 1rem;
+            text-decoration: none;
             cursor: pointer;
             margin-bottom: 20px;
-            display: flex;
+            display: inline-flex;
             align-items: center;
             gap: 8px;
             transition: color 0.3s;
@@ -243,7 +244,7 @@
         <h1>Project Frisk</h1>
         <p>Experience seamless iOS sideloading.</p>
         
-        <button onclick="goToView('view-dns')" class="btn btn-primary">Get Started</button>
+        <a href="#dns" class="btn btn-primary">Get Started</a>
 
         <ins class="adsbygoogle"
              style="display:block;margin:20px auto;"
@@ -264,7 +265,7 @@
     </div>
 
     <div id="view-dns" class="glass-card hidden">
-        <button onclick="goToView('view-home')" class="btn-back"><i class="fa-solid fa-arrow-left"></i> Back</button>
+        <a href="#home" class="btn-back"><i class="fa-solid fa-arrow-left"></i> Back</a>
         
         <h2>DNS Setup</h2>
         <p>Install the Project Frisk DNS profile to block Apple's revoke servers and keep your apps running.</p>
@@ -286,15 +287,27 @@
     </div>
 
     <script>
-        // Switch between Home and DNS views
-        function goToView(viewId) {
-            // Hide all views
-            document.getElementById('view-home').classList.add('hidden');
-            document.getElementById('view-dns').classList.add('hidden');
+        function handleRouting() {
+            const hash = window.location.hash;
             
-            // Show the requested view
-            document.getElementById(viewId).classList.remove('hidden');
+            // Elements
+            const homeView = document.getElementById('view-home');
+            const dnsView = document.getElementById('view-dns');
+            
+            // Route conditions
+            if (hash === '#dns') {
+                homeView.classList.add('hidden');
+                dnsView.classList.remove('hidden');
+            } else {
+                // Default fallback if hash is empty or #home
+                dnsView.classList.add('hidden');
+                homeView.classList.remove('hidden');
+            }
         }
+
+        // Listen for URL hash updates and page entry points
+        window.addEventListener('hashchange', handleRouting);
+        window.addEventListener('load', handleRouting);
     </script>
 
 </body>
