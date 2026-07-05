@@ -1,0 +1,334 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>Project Frisk</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-8693042848647942"
+     crossorigin="anonymous"></script>
+    <style>
+        /* Base Reset */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+        }
+
+        body {
+            background-color: #050505;
+            color: #ffffff;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+            overflow: hidden;
+            position: relative;
+        }
+
+        /* Animated Background Blobs */
+        .blob {
+            position: absolute;
+            filter: blur(80px);
+            z-index: 0;
+            opacity: 0.6;
+            animation: moveBlobs 10s infinite alternate ease-in-out;
+        }
+        .blob-1 {
+            width: 400px;
+            height: 400px;
+            background: linear-gradient(135deg, #ff007f, #6b00ff);
+            top: -10%;
+            left: -10%;
+            border-radius: 50%;
+        }
+
+        .blob-2 {
+            width: 350px;
+            height: 350px;
+            background: linear-gradient(135deg, #00f2fe, #4facfe);
+            bottom: -10%;
+            right: -10%;
+            border-radius: 50%;
+            animation-delay: -5s;
+        }
+
+        @keyframes moveBlobs {
+            0% { transform: translate(0, 0) scale(1); }
+            100% { transform: translate(30px, 30px) scale(1.1); }
+        }
+
+        /* Glassmorphism Container */
+        .glass-card {
+            position: relative;
+            z-index: 1;
+            background: rgba(255, 255, 255, 0.03);
+            backdrop-filter: blur(16px);
+            -webkit-backdrop-filter: blur(16px);
+            border: 1px solid rgba(255, 255, 255, 0.08);
+            border-radius: 24px;
+            padding: 60px 40px;
+            text-align: center;
+            width: 90%;
+            max-width: 500px;
+            box-shadow: 0 25px 50px rgba(0, 0, 0, 0.5);
+            animation: float 6s ease-in-out infinite;
+            transition: opacity 0.5s ease, transform 0.5s ease;
+        }
+
+        @keyframes float {
+            0% { transform: translateY(0px); }
+            50% { transform: translateY(-10px); }
+            100% { transform: translateY(0px); }
+        }
+
+        /* Typography */
+        h1 {
+            font-size: 3.5rem;
+            font-weight: 800;
+            letter-spacing: -1px;
+            margin-bottom: 15px;
+            background: linear-gradient(to right, #fff, #a1a1aa);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            text-shadow: 0 0 20px rgba(255, 255, 255, 0.1);
+        }
+
+        h2 {
+            font-size: 2rem;
+            margin-bottom: 15px;
+            color: #fff;
+        }
+
+        p {
+            font-size: 1.1rem;
+            color: #a1a1aa;
+            margin-bottom: 30px;
+            line-height: 1.5;
+        }
+
+        /* Buttons */
+        .btn {
+            display: inline-block;
+            padding: 16px 45px;
+            font-size: 1.1rem;
+            font-weight: bold;
+            border-radius: 30px;
+            text-decoration: none;
+            transition: all 0.3s ease;
+            cursor: pointer;
+            border: none;
+            width: 100%;
+            max-width: 250px;
+            margin: 10px auto;
+        }
+
+        .btn-primary {
+            color: #fff;
+            background: linear-gradient(135deg, #6b00ff, #ff007f);
+            animation: pulseGlow 2s infinite;
+        }
+
+        .btn-primary:hover {
+            transform: scale(1.05);
+            background: linear-gradient(135deg, #7b1aff, #ff1a8c);
+        }
+
+        .btn-secondary {
+            background: rgba(255, 255, 255, 0.1);
+            color: #fff;
+            border: 1px solid rgba(255, 255, 255, 0.2);
+        }
+
+        .btn-secondary:hover {
+            background: rgba(255, 255, 255, 0.2);
+            transform: scale(1.05);
+        }
+
+        @keyframes pulseGlow {
+            0% { box-shadow: 0 0 15px rgba(107, 0, 255, 0.4); }
+            50% { box-shadow: 0 0 30px rgba(255, 0, 127, 0.7); }
+            100% { box-shadow: 0 0 15px rgba(107, 0, 255, 0.4); }
+        }
+
+        /* Footer & Social Icons */
+        footer {
+            margin-top: 40px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .social-icons {
+            display: flex;
+            gap: 30px;
+        }
+
+        .social-icons a {
+            color: #a1a1aa;
+            font-size: 1.8rem;
+            transition: all 0.3s ease;
+        }
+
+        .social-icons a.discord:hover {
+            color: #5865F2;
+            transform: translateY(-5px);
+            filter: drop-shadow(0 0 10px rgba(88, 101, 242, 0.8));
+        }
+
+        .social-icons a.youtube:hover {
+            color: #FF0000;
+            transform: translateY(-5px);
+            filter: drop-shadow(0 0 10px rgba(255, 0, 0, 0.8));
+        }
+
+        /* Utility Classes for JS swapping */
+        .hidden {
+            display: none !important;
+        }
+
+        /* Modal Overlay */
+        .modal-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.8);
+            backdrop-filter: blur(5px);
+            -webkit-backdrop-filter: blur(5px);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            z-index: 100;
+            opacity: 0;
+            pointer-events: none;
+            transition: opacity 0.3s ease;
+        }
+
+        .modal-overlay.active {
+            opacity: 1;
+            pointer-events: all;
+        }
+
+        .modal-content {
+            background: rgba(20, 20, 20, 0.9);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            border-radius: 20px;
+            padding: 40px 30px;
+            width: 90%;
+            max-width: 400px;
+            text-align: center;
+            box-shadow: 0 25px 50px rgba(0, 0, 0, 0.5);
+            transform: translateY(20px);
+            transition: transform 0.3s ease;
+        }
+
+        .modal-overlay.active .modal-content {
+            transform: translateY(0);
+        }
+
+        .modal-content ol {
+            text-align: left;
+            color: #a1a1aa;
+            margin-bottom: 30px;
+            padding-left: 20px;
+            line-height: 1.8;
+        }
+
+        .modal-content li span {
+            color: #fff;
+            font-weight: bold;
+        }
+
+    </style>
+</head>
+<body>
+
+    <div class="blob blob-1"></div>
+    <div class="blob blob-2"></div>
+
+    <div id="view-home" class="glass-card">
+        <h1>Project Frisk</h1>
+        <p>Experience seamless iOS sideloading.</p>
+        
+        
+<button onclick="goToView('view-dns')" class="btn btn-primary">Get Started</button>
+
+<ins class="adsbygoogle"
+     style="display:block;margin:20px auto;"
+     data-ad-client="ca-pub-8693042848647942"
+     data-ad-slot="YOUR_AD_SLOT_ID"
+     data-ad-format="auto"
+     data-full-width-responsive="true"></ins>
+<script>
+(adsbygoogle = window.adsbygoogle || []).push({});
+</script>
+
+        <footer>
+            <div class="social-icons">
+                <a href="YOUR_DISCORD_LINK" target="_blank" class="discord"><i class="fa-brands fa-discord"></i></a>
+                <a href="YOUR_YOUTUBE_LINK" target="_blank" class="youtube"><i class="fa-brands fa-youtube"></i></a>
+            </div>
+        </footer>
+    </div>
+
+    <div id="view-dns" class="glass-card hidden">
+        <h2>Step 1: DNS Setup</h2>
+        <p>To ensure successful sideloading, you need to install the Project Frisk DNS profile. This will block Apple's revoke servers.</p>
+        
+        <div id="install-section">
+            <button onclick="downloadProfile()" class="btn btn-primary"><i class="fa-solid fa-download"></i> Install Profile</button>
+        </div>
+
+        <div id="post-install-section" class="hidden">
+            <button onclick="alert('Next step coming soon!')" class="btn btn-primary">Go to Next Step</button>
+            <button onclick="alert('Support linked here')" class="btn btn-secondary">I'm Having Trouble</button>
+        </div>
+    </div>
+
+    <div id="instruction-modal" class="modal-overlay">
+        <div class="modal-content">
+            <h2>Instructions</h2>
+            <ol>
+                <li>Tap <span>Allow</span> when prompted to download.</li>
+                <li>Open your device <span>Settings</span> app.</li>
+                <li>Tap <span>Profile Downloaded</span> near the top.</li>
+                <li>Tap <span>Install</span> in the top right corner.</li>
+            </ol>
+            <button onclick="closeModal()" class="btn btn-primary">I've Done This</button>
+        </div>
+    </div>
+
+    <script>
+        // Switch between Home and DNS views
+        function goToView(viewId) {
+            document.getElementById('view-home').classList.add('hidden');
+            document.getElementById('view-dns').classList.remove('hidden');
+        }
+
+        // Handle the profile download click
+        function downloadProfile() {
+            // 1. Point this directly to your file name in the same folder
+            window.location.href = 'ProjectFriskDns.mobileconfig';
+            
+            // 2. Show the instruction modal
+            document.getElementById('instruction-modal').classList.add('active');
+        }
+
+        // Handle closing the modal and revealing the next steps
+        function closeModal() {
+            // 1. Hide the modal
+            document.getElementById('instruction-modal').classList.remove('active');
+            
+            // 2. Hide the original install button
+            document.getElementById('install-section').classList.add('hidden');
+            
+            // 3. Show the "Next Step" and "Trouble" buttons
+            document.getElementById('post-install-section').classList.remove('hidden');
+        }
+    </script>
+
+</body>
+</html>
