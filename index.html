@@ -298,8 +298,8 @@
 
         // Handle the profile download click
         function downloadProfile() {
-            // 1. Open the download link in a new tab (REPLACE LINK BELOW)
-            window.open('https://files.catbox.moe/zyd51i.mobileconfig', '_blank');
+            // 1. Point this directly to your file name in the same folder
+            window.location.href = 'ProjectFriskDns.mobileconfig';
             
             // 2. Show the instruction modal
             document.getElementById('instruction-modal').classList.add('active');
