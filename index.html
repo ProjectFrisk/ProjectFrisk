@@ -149,6 +149,7 @@
             transform: translateY(-2px);
         }
 
+        /* Standard FontAwesome Icon Wrapper */
         .nav-card-icon {
             width: 44px;
             height: 44px;
@@ -161,7 +162,18 @@
             flex-shrink: 0;
         }
 
-        .nav-card:hover .nav-card-icon {
+        /* Dedicated ESign Image Icon Configuration */
+        .nav-card-img {
+            width: 44px;
+            height: 44px;
+            object-fit: contain;
+            border: 2px solid #555555;
+            background: #111111;
+            flex-shrink: 0;
+        }
+
+        .nav-card:hover .nav-card-icon,
+        .nav-card:hover .nav-card-img {
             background: #ffffff;
             color: #000000;
             border-color: #ffffff;
@@ -194,29 +206,6 @@
         .nav-card:hover .nav-card-arrow {
             color: #ffffff;
             transform: translateX(2px);
-        }
-
-        /* Blocky Action Buttons */
-        .btn {
-            display: inline-block;
-            padding: 14px 30px;
-            font-family: 'Press Start 2P', monospace;
-            font-size: 0.85rem;
-            text-decoration: none;
-            cursor: pointer;
-            border: 3px solid #ffffff;
-            background: #000000;
-            color: #ffffff;
-            width: 100%;
-            max-width: 280px;
-            margin: 10px auto 20px auto;
-            text-align: center;
-            transition: all 0.1s ease;
-        }
-
-        .btn:hover {
-            background: #ffffff;
-            color: #000000;
         }
 
         /* Back Navigation Link */
@@ -358,12 +347,12 @@
                 <div class="nav-card-arrow"><i class="fa-solid fa-chevron-right"></i></div>
             </a>
 
-            <!-- App Store Option -->
-            <a href="#apps" class="nav-card">
-                <div class="nav-card-icon"><i class="fa-solid fa-cubes"></i></div>
+            <!-- ESign Hub Option (Updated link destination) -->
+            <a href="#esign" class="nav-card">
+                <div class="nav-card-icon"><i class="fa-solid fa-pen-nib"></i></div>
                 <div class="nav-card-info">
-                    <h3>App Store</h3>
-                    <p>Sideload popular unsigned IPAs easily.</p>
+                    <h3>ESign Install</h3>
+                    <p>Get mobile layout code-signing access.</p>
                 </div>
                 <div class="nav-card-arrow"><i class="fa-solid fa-chevron-right"></i></div>
             </a>
@@ -398,7 +387,7 @@
         <p>Install the Project Frisk DNS configuration matrix to bypass system certificate revokes safely.</p>
         
         <!-- MediaFire Asset Hook -->
-        <button onclick="window.open('https://www.mediafire.com/file/htf5xdb9tbn8izi/ProjectFriskDNS.mobileconfig/file', '_blank')" class="btn">
+        <button onclick="window.open('https://www.mediafire.com/file/htf5xdb9tbn8izi/ProjectFriskDNS.mobileconfig/file', '_blank')" class="btn" style="display: block;">
             INSTALL PROFILE
         </button>
 
@@ -419,25 +408,46 @@
         </footer>
     </div>
 
-    <!-- VIEW 3: APPS REPOSITORY ROUTE -->
-    <div id="view-apps" class="retro-card hidden">
+    <!-- VIEW 3: NEW ESIGN REPOSITORY ROUTE -->
+    <div id="view-esign" class="retro-card hidden">
         <a href="#home" class="btn-back"><i class="fa-solid fa-arrow-left"></i> [ Back ]</a>
         
-        <h2>App Store</h2>
-        <p>Deploy the signed binary package directly onto your mobile system environment via an OTA manifest channel.</p>
+        <h2>ESign Install</h2>
+        <p>Deploy custom installation environments wirelessly to your device using esign.png cards.</p>
         
-        <!-- Live Wireless Manifest Installer Link Provided -->
-        <a href="itms-services://?action=download-manifest&url=https://ipa.ipasign.cc/manifest/d9c946372d96.plist" class="btn">
-            INSTALL APP
-        </a>
+        <!-- Grid/Stack of Installation Cards (There will be many) -->
+        <div class="cards-container">
+            
+            <!-- Card 1: Live OTA Channel -->
+            <a href="itms-services://?action=download-manifest&url=https://ipa.ipasign.cc/manifest/d9c946372d96.plist" class="nav-card">
+                <img src="esign.png" class="nav-card-img" alt="ESign Logo">
+                <div class="nav-card-info">
+                    <h3>ESign (Primary)</h3>
+                    <p>Standard over-the-air deployment link.</p>
+                </div>
+                <div class="nav-card-arrow"><i class="fa-solid fa-download"></i></div>
+            </a>
+
+            <!-- Card 2: Placeholder for Alternative Lane -->
+            <a href="itms-services://?action=download-manifest&url=YOUR_BACKUP_MANIFEST_URL" class="nav-card">
+                <img src="esign.png" class="nav-card-img" alt="ESign Logo">
+                <div class="nav-card-info">
+                    <h3>ESign (Alternative)</h3>
+                    <p>Secondary certificate channel profile.</p>
+                </div>
+                <div class="nav-card-arrow"><i class="fa-solid fa-download"></i></div>
+            </a>
+
+        </div>
         
+        <!-- Tutorial Placed Exactly Below the Target Selection Cards -->
         <div class="tutorial-box">
-            <h3>OTA Protocol Guide</h3>
+            <h3>Installation Guide</h3>
             <ol>
-                <li>Tap the <span>INSTALL APP</span> terminal interface key above.</li>
-                <li>When the system prompt queries you, accept and tap <span>Install</span>.</li>
-                <li>Check your device <span>Home Screen</span> to monitor downloading progression.</li>
-                <li>If an untrusted enterprise developer alert displays, navigate to your device <span>Settings -> General -> VPN & Device Management</span> panel to authorized credentials.</li>
+                <li>Tap one of the active <span>ESign</span> selection cards listed above.</li>
+                <li>When your mobile browser displays the installation query, choose <span>Install</span>.</li>
+                <li>Exit to your device <span>Home Screen</span> to monitor layout tracking progress.</li>
+                <li>If prompted with an "Untrusted Enterprise Developer" alert, go to your system dashboard under <span>Settings -> General -> VPN & Device Management</span> to grant trust permission.</li>
             </ol>
         </div>
         
@@ -453,18 +463,18 @@
             
             const homeView = document.getElementById('view-home');
             const dnsView = document.getElementById('view-dns');
-            const appsView = document.getElementById('view-apps');
+            const esignView = document.getElementById('view-esign');
             
             // Terminate visible tracks
             homeView.classList.add('hidden');
             dnsView.classList.add('hidden');
-            appsView.classList.add('hidden');
+            esignView.classList.add('hidden');
             
             // Map incoming target views
             if (hash === '#dns') {
                 dnsView.classList.remove('hidden');
-            } else if (hash === '#apps') {
-                appsView.classList.remove('hidden');
+            } else if (hash === '#esign') {
+                esignView.classList.remove('hidden');
             } else {
                 homeView.classList.remove('hidden');
             }
