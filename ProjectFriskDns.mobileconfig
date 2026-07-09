@@ -4,6 +4,8 @@
   <dict>
     <key>PayloadDisplayName</key>
     <string>Project Frisk DNS</string>
+    <key>PayloadOrganization</key>
+    <string>Project Frisk</string>
     <key>PayloadDescription</key>
     <string>This profile enables Project Frisk DNS.</string>
     <key>PayloadIdentifier</key>
@@ -12,7 +14,7 @@
     <string>System</string>
     <key>PayloadType</key>
     <string>Configuration</string>
-    <key>PayloadUUID</key>
+   <key>PayloadUUID</key>
     <string>A1E2F262-DB73-40F6-BD22-2E42A43A3C94.d47ea9</string>
     <key>PayloadVersion</key>
     <integer>1</integer>
@@ -66,7 +68,7 @@
         <key>PayloadIdentifier</key>
         <string>io.nextdns.d47ea9.profile.dnsSettings.managed</string>
         <key>PayloadUUID</key>
-        <string>A1E2F262-DB73-40F6-BD22-2E42A43A3C94.d47ea9.dnsSettings.managed</string>
+        <string>A1E2F262-DB73-40F6-BD22-2E42A43A3C94.dnsSettings.managed
         <key>PayloadDisplayName</key>
         <string>Project Frisk DNS</string>
         <key>PayloadOrganization</key>
@@ -90,7 +92,3 @@
       </dict>
     </array>
   </dict>
-</plist>>
-    </array>
-  </dict>
-</plist>
