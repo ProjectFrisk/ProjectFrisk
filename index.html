@@ -13,9 +13,6 @@
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Press+Start+2P&family=VT323&display=swap" rel="stylesheet">
     
-    <!-- Google AdSense Script -->
-    <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-8693042848647942" crossorigin="anonymous"></script>
-    
     <style>
         /* Base Reset & Retro Defaults */
         * { margin: 0; padding: 0; box-sizing: border-box; image-rendering: pixelated; }
@@ -48,19 +45,10 @@
         }
         .retro-card::-webkit-scrollbar { display: none; }
 
-        /* Inline SVG Pixel Hearts Logo Group */
-        .logo-hearts-container { display: flex; justify-content: center; gap: 25px; margin-bottom: 20px; }
-        .pixel-heart { shape-rendering: crispEdges; transition: transform 0.2s ease; }
-        .retro-card:hover .pixel-heart { transform: scale(1.05); }
-        .heart-yellow { color: #d4b100; filter: drop-shadow(0 0 4px rgba(212,177,0,0.5)); }
-        .heart-red { color: #e60000; filter: drop-shadow(0 0 4px rgba(230,0,0,0.5)); }
-        .heart-purple { color: #8000ff; filter: drop-shadow(0 0 4px rgba(128,0,255,0.5)); }
-
         /* Typography */
         h1 { font-family: 'Press Start 2P', monospace; font-size: 1.6rem; line-height: 1.4; margin-bottom: 8px; color: #ffffff; letter-spacing: -1px; }
         .subtitle { font-family: 'Press Start 2P', monospace; font-size: 0.8rem; color: #bcbcbc; margin-bottom: 35px; text-transform: uppercase; }
         h2 { font-family: 'Press Start 2P', monospace; font-size: 1.3rem; margin-bottom: 15px; color: #ffffff; }
-        p { color: #bcbcbc; margin-bottom: 25px; line-height: 1.4; }
 
         /* Retro Navigation Cards */
         .cards-container { display: flex; flex-direction: column; gap: 16px; margin: 10px 0 25px 0; }
@@ -70,9 +58,8 @@
             transition: all 0.2s steps(4); cursor: pointer;
         }
         .nav-card:hover { border-color: #ffffff; background: #111111; transform: translateY(-2px); }
-        .nav-card-icon, .nav-card-img { width: 44px; height: 44px; background: #222222; border: 2px solid #555555; display: flex; justify-content: center; align-items: center; font-size: 1.2rem; flex-shrink: 0; }
-        .nav-card-img { object-fit: contain; }
-        .nav-card:hover .nav-card-icon, .nav-card:hover .nav-card-img { background: #ffffff; color: #000000; border-color: #ffffff; }
+        .nav-card-icon { width: 44px; height: 44px; background: #222222; border: 2px solid #555555; display: flex; justify-content: center; align-items: center; font-size: 1.2rem; flex-shrink: 0; }
+        .nav-card:hover .nav-card-icon { background: #ffffff; color: #000000; border-color: #ffffff; }
         .nav-card-info { flex-grow: 1; padding: 0 14px; }
         .nav-card-info h3 { font-family: 'Press Start 2P', monospace; font-size: 0.85rem; margin-bottom: 5px; color: #ffffff; line-height: 1.3; }
         .nav-card-info p { font-size: 1.1rem; color: #bcbcbc; margin-bottom: 0; line-height: 1.3; }
@@ -82,18 +69,6 @@
         /* Back Navigation Link */
         .btn-back { background: transparent; color: #bcbcbc; border: none; font-family: 'Press Start 2P', monospace; font-size: 0.75rem; text-decoration: none; cursor: pointer; margin-bottom: 25px; display: inline-flex; align-items: center; gap: 8px; }
         .btn-back:hover { color: #ffff00; }
-
-        /* Tutorial/Instruction Container */
-        .tutorial-box { background: #000000; border: 3px dashed #555555; padding: 20px; text-align: left; margin-top: 15px; }
-        .tutorial-box h3 { font-family: 'Press Start 2P', monospace; font-size: 0.85rem; margin-bottom: 15px; color: #ffff00; text-align: center; }
-        .tutorial-box ol { color: #bcbcbc; padding-left: 20px; line-height: 1.6; }
-        .tutorial-box li span { color: #ffffff; font-weight: bold; text-decoration: underline; }
-
-        footer { margin-top: 25px; border-top: 2px dashed #333333; padding-top: 20px; }
-        .footer-note { font-family: 'Press Start 2P', monospace; font-size: 0.65rem; color: #555555; margin-bottom: 15px; }
-        .social-icons { display: flex; justify-content: center; gap: 25px; }
-        .social-icons a { color: #bcbcbc; font-size: 1.5rem; transition: color 0.1s ease; }
-        .social-icons a:hover { color: #ffffff; }
 
         .hidden { display: none !important; }
     </style>
@@ -110,7 +85,7 @@
         <h1>Project Frisk</h1>
         <div class="subtitle">iOS Sideloader</div>
         <div class="cards-container">
-            <a href="#dns" class="nav-card"><div class="nav-card-icon"><i class="fa-solid fa-shield-halved"></i></div><div class="nav-card-info"><h3>DNS Setup</h3><p>Block Apple's revoke servers.</p></div></a>
+            <a href="#dns" class="nav-card"><div class="nav-card-icon"><i class="fa-solid fa-shield-halved"></i></div><div class="nav-card-info"><h3>DNS Setup</h3><p>Block Apple revokes.</p></div></a>
             <a href="#esign" class="nav-card"><div class="nav-card-icon"><i class="fa-solid fa-pen-nib"></i></div><div class="nav-card-info"><h3>ESign Install</h3><p>Code-signing access.</p></div></a>
             <a href="#apps" class="nav-card"><div class="nav-card-icon"><i class="fa-solid fa-mobile-screen"></i></div><div class="nav-card-info"><h3>IPA Library</h3><p>Tweaked apps.</p></div></a>
             <a href="#sign" class="nav-card"><div class="nav-card-icon"><i class="fa-solid fa-signature"></i></div><div class="nav-card-info"><h3>Sign IPA</h3><p>Automated cloud signing.</p></div></a>
@@ -149,9 +124,30 @@
     <div id="view-sign" class="retro-card hidden">
         <a href="#home" class="btn-back"><i class="fa-solid fa-arrow-left"></i> [ Back ]</a>
         <h2>Sign IPA</h2>
-        <input type="text" id="ipaUrl" placeholder="IPA Download URL" style="width: 100%; padding: 10px; margin-bottom: 10px; background: #111; color: #fff; border: 1px solid #555;">
-        <input type="password" id="p12Pass" placeholder="P12 Password" style="width: 100%; padding: 10px; margin-bottom: 10px; background: #111; color: #fff; border: 1px solid #555;">
-        <button onclick="startSigning()" style="width: 100%; padding: 15px; background: #fff; color: #000; font-family: 'Press Start 2P'; cursor: pointer;">START SIGNING</button>
+        
+        <div style="text-align: left; margin-bottom: 15px;">
+            <p style="font-size: 0.8rem; margin-bottom: 5px;">1. IPA Link (Direct URL)</p>
+            <input type="url" id="ipaUrl" placeholder="https://example.com/app.ipa" style="width: 100%; padding: 10px; background: #111; color: #fff; border: 1px solid #555;">
+        </div>
+
+        <div style="text-align: left; margin-bottom: 15px;">
+            <p style="font-size: 0.8rem; margin-bottom: 5px;">2. Certificate (.p12)</p>
+            <input type="file" id="p12File" accept=".p12" style="width: 100%; background: #111; color: #fff; border: 1px solid #555; padding: 5px;">
+        </div>
+
+        <div style="text-align: left; margin-bottom: 15px;">
+            <p style="font-size: 0.8rem; margin-bottom: 5px;">3. Provisioning Profile</p>
+            <input type="file" id="provisionFile" accept=".mobileprovision" style="width: 100%; background: #111; color: #fff; border: 1px solid #555; padding: 5px;">
+        </div>
+
+        <div style="text-align: left; margin-bottom: 20px;">
+            <p style="font-size: 0.8rem; margin-bottom: 5px;">4. Cert Password</p>
+            <input type="password" id="p12Pass" placeholder="Password" style="width: 100%; padding: 10px; background: #111; color: #fff; border: 1px solid #555;">
+        </div>
+
+        <button id="signBtn" onclick="processAndSign()" style="width: 100%; padding: 15px; background: #fff; color: #000; font-family: 'Press Start 2P'; cursor: pointer;">SIGN & INSTALL</button>
+        
+        <p id="statusText" style="margin-top: 15px; font-size: 0.8rem; color: #ffff00; line-height: 1.4;"></p>
     </div>
 
     <script>
@@ -164,30 +160,84 @@
             });
         }
 
-        async function startSigning() {
+        function getBase64(file) {
+            return new Promise((resolve, reject) => {
+                const reader = new FileReader();
+                reader.readAsDataURL(file);
+                reader.onload = () => {
+                    let encoded = reader.result.toString().replace(/^data:(.*,)?/, '');
+                    if ((encoded.length % 4) > 0) encoded += '='.repeat(4 - (encoded.length % 4));
+                    resolve(encoded);
+                };
+                reader.onerror = error => reject(error);
+            });
+        }
+
+        async function processAndSign() {
+            // --- CONFIGURATION ---
             const OWNER = "ProjectFrisk";
             const REPO = "ProjectFrisk";
             const TOKEN = "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";
-            const WORKFLOW_ID = "sign.yml";
+            const WORKFLOW_ID = "sign.yml"; 
+            // ---------------------
 
             const ipaUrl = document.getElementById('ipaUrl').value;
+            const p12File = document.getElementById('p12File').files[0];
+            const provisionFile = document.getElementById('provisionFile').files[0];
             const p12Pass = document.getElementById('p12Pass').value;
+            const statusText = document.getElementById('statusText');
+            const signBtn = document.getElementById('signBtn');
 
-            const response = await fetch(`https://api.github.com/repos/${OWNER}/${REPO}/actions/workflows/${WORKFLOW_ID}/dispatches`, {
-                method: 'POST',
-                headers: {
-                    'Authorization': `Bearer ${TOKEN}`,
-                    'Accept': 'application/vnd.github.v3+json',
-                    'Content-Type': 'application/json'
-                },
-                body: JSON.stringify({
-                    ref: 'main',
-                    inputs: { ipa_url: ipaUrl, password: p12Pass, p12_base64: "PLACEHOLDER", mobileprovision_base64: "PLACEHOLDER" }
-                })
-            });
+            if (!ipaUrl || !p12File || !provisionFile || !p12Pass) {
+                statusText.innerText = "Error: Fill out all fields and upload both files.";
+                statusText.style.color = "#ff5555";
+                return;
+            }
 
-            if (response.ok) alert("Signing started!");
-            else alert("Error triggering workflow.");
+            statusText.innerText = "Packaging files...";
+            statusText.style.color = "#ffff00";
+            signBtn.disabled = true;
+            signBtn.style.opacity = "0.5";
+
+            try {
+                const p12Base64 = await getBase64(p12File);
+                const provBase64 = await getBase64(provisionFile);
+
+                statusText.innerText = "Sending to signing server...";
+
+                const response = await fetch(`https://api.github.com/repos/${OWNER}/${REPO}/actions/workflows/${WORKFLOW_ID}/dispatches`, {
+                    method: 'POST',
+                    headers: {
+                        'Authorization': `Bearer ${TOKEN}`,
+                        'Accept': 'application/vnd.github.v3+json',
+                        'Content-Type': 'application/json'
+                    },
+                    body: JSON.stringify({
+                        ref: 'main',
+                        inputs: { 
+                            ipa_url: ipaUrl, 
+                            password: p12Pass, 
+                            p12_base64: p12Base64, 
+                            mobileprovision_base64: provBase64 
+                        }
+                    })
+                });
+
+                if (response.ok) {
+                    statusText.innerHTML = "Signing Started! ⏳<br><br>Wait ~2 minutes, then go to your repository's <b>Actions</b> tab on GitHub. Click the workflow run to find your direct Install Link.";
+                    statusText.style.color = "#55ff55";
+                } else {
+                    const error = await response.json();
+                    statusText.innerText = "Error triggering workflow: " + error.message;
+                    statusText.style.color = "#ff5555";
+                }
+            } catch (err) {
+                statusText.innerText = "Failed to connect to GitHub API.";
+                statusText.style.color = "#ff5555";
+            } finally {
+                signBtn.disabled = false;
+                signBtn.style.opacity = "1";
+            }
         }
 
         function handleRouting() {
