@@ -13,9 +13,17 @@
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Press+Start+2P&family=VT323&display=swap" rel="stylesheet">
     
+    <!-- Google AdSense Script -->
+    <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-8693042848647942" crossorigin="anonymous"></script>
+    
     <style>
         /* Base Reset & Retro Defaults */
-        * { margin: 0; padding: 0; box-sizing: border-box; image-rendering: pixelated; }
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            image-rendering: pixelated;
+        }
 
         body {
             background-color: #000000;
@@ -31,7 +39,14 @@
         }
 
         /* Decorative Background Pixel Noise */
-        .pixel-bg-element { position: absolute; background: #222222; width: 12px; height: 12px; z-index: 0; opacity: 0.7; }
+        .pixel-bg-element {
+            position: absolute;
+            background: #222222;
+            width: 12px;
+            height: 12px;
+            z-index: 0;
+            opacity: 0.7;
+        }
         .p1 { top: 15%; left: 10%; box-shadow: 24px 12px #111, -12px 36px #222; }
         .p2 { top: 75%; left: 15%; box-shadow: 12px -24px #333, 48px 12px #111; }
         .p3 { top: 25%; right: 12%; box-shadow: -36px 48px #222, 12px 12px #333; }
@@ -39,221 +54,729 @@
 
         /* Retro RPG Main Panel */
         .retro-card {
-            position: relative; z-index: 1; background: #000000; border: 4px solid #ffffff;
-            padding: 40px 24px; text-align: center; width: 92%; max-width: 480px;
-            max-height: 95vh; overflow-y: auto; box-shadow: 0 0 0 4px #000000, 0 20px 40px rgba(0,0,0,0.8);
+            position: relative;
+            z-index: 1;
+            background: #000000;
+            border: 4px solid #ffffff;
+            padding: 40px 24px;
+            text-align: center;
+            width: 92%;
+            max-width: 480px;
+            max-height: 95vh;
+            overflow-y: auto;
+            box-shadow: 0 0 0 4px #000000, 0 20px 40px rgba(0,0,0,0.8);
         }
-        .retro-card::-webkit-scrollbar { display: none; }
+
+        .retro-card::-webkit-scrollbar {
+            display: none;
+        }
+
+        /* Inline SVG Pixel Hearts Logo Group */
+        .logo-hearts-container {
+            display: flex;
+            justify-content: center;
+            gap: 25px;
+            margin-bottom: 20px;
+        }
+
+        .pixel-heart {
+            shape-rendering: crispEdges;
+            transition: transform 0.2s ease;
+        }
+        
+        .retro-card:hover .pixel-heart {
+            transform: scale(1.05);
+        }
+
+        .heart-yellow { color: #d4b100; filter: drop-shadow(0 0 4px rgba(212,177,0,0.5)); }
+        .heart-red { color: #e60000; filter: drop-shadow(0 0 4px rgba(230,0,0,0.5)); }
+        .heart-purple { color: #8000ff; filter: drop-shadow(0 0 4px rgba(128,0,255,0.5)); }
 
         /* Typography */
-        h1 { font-family: 'Press Start 2P', monospace; font-size: 1.6rem; line-height: 1.4; margin-bottom: 8px; color: #ffffff; letter-spacing: -1px; }
-        .subtitle { font-family: 'Press Start 2P', monospace; font-size: 0.8rem; color: #bcbcbc; margin-bottom: 35px; text-transform: uppercase; }
-        h2 { font-family: 'Press Start 2P', monospace; font-size: 1.3rem; margin-bottom: 15px; color: #ffffff; }
+        h1 {
+            font-family: 'Press Start 2P', monospace;
+            font-size: 1.6rem;
+            line-height: 1.4;
+            margin-bottom: 8px;
+            color: #ffffff;
+            letter-spacing: -1px;
+        }
+
+        .subtitle {
+            font-family: 'Press Start 2P', monospace;
+            font-size: 0.8rem;
+            color: #bcbcbc;
+            margin-bottom: 35px;
+            text-transform: uppercase;
+        }
+
+        h2 {
+            font-family: 'Press Start 2P', monospace;
+            font-size: 1.3rem;
+            margin-bottom: 15px;
+            color: #ffffff;
+        }
+
+        p {
+            color: #bcbcbc;
+            margin-bottom: 25px;
+            line-height: 1.4;
+        }
 
         /* Retro Navigation Cards */
-        .cards-container { display: flex; flex-direction: column; gap: 16px; margin: 10px 0 25px 0; }
-        .nav-card {
-            display: flex; align-items: center; background: #000000; border: 3px solid #555555;
-            padding: 16px; text-decoration: none; color: #ffffff; text-align: left;
-            transition: all 0.2s steps(4); cursor: pointer;
+        .cards-container {
+            display: flex;
+            flex-direction: column;
+            gap: 16px;
+            margin: 10px 0 25px 0;
         }
-        .nav-card:hover { border-color: #ffffff; background: #111111; transform: translateY(-2px); }
-        .nav-card-icon { width: 44px; height: 44px; background: #222222; border: 2px solid #555555; display: flex; justify-content: center; align-items: center; font-size: 1.2rem; flex-shrink: 0; }
-        .nav-card:hover .nav-card-icon { background: #ffffff; color: #000000; border-color: #ffffff; }
-        .nav-card-info { flex-grow: 1; padding: 0 14px; }
-        .nav-card-info h3 { font-family: 'Press Start 2P', monospace; font-size: 0.85rem; margin-bottom: 5px; color: #ffffff; line-height: 1.3; }
-        .nav-card-info p { font-size: 1.1rem; color: #bcbcbc; margin-bottom: 0; line-height: 1.3; }
-        .nav-card-arrow { color: #555555; font-size: 0.9rem; transition: all 0.2s; }
-        .nav-card:hover .nav-card-arrow { color: #ffffff; transform: translateX(2px); }
+
+        .nav-card {
+            display: flex;
+            align-items: center;
+            background: #000000;
+            border: 3px solid #555555;
+            padding: 16px;
+            text-decoration: none;
+            color: #ffffff;
+            text-align: left;
+            transition: all 0.2s steps(4);
+            cursor: pointer;
+        }
+
+        .nav-card:hover {
+            border-color: #ffffff;
+            background: #111111;
+            transform: translateY(-2px);
+        }
+
+        /* Standard FontAwesome Icon Wrapper */
+        .nav-card-icon {
+            width: 44px;
+            height: 44px;
+            background: #222222;
+            border: 2px solid #555555;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            font-size: 1.2rem;
+            flex-shrink: 0;
+        }
+
+        /* Dedicated Image Icon Configuration */
+        .nav-card-img {
+            width: 44px;
+            height: 44px;
+            object-fit: contain;
+            border: 2px solid #555555;
+            background: #111111;
+            flex-shrink: 0;
+        }
+
+        .nav-card:hover .nav-card-icon,
+        .nav-card:hover .nav-card-img {
+            background: #ffffff;
+            color: #000000;
+            border-color: #ffffff;
+        }
+
+        .nav-card-info {
+            flex-grow: 1;
+            padding: 0 14px;
+        }
+
+        .nav-card-info h3 {
+            font-family: 'Press Start 2P', monospace;
+            font-size: 0.85rem;
+            margin-bottom: 5px;
+            color: #ffffff;
+            line-height: 1.3;
+        }
+
+        .nav-card-info p {
+            font-size: 1.1rem;
+            color: #bcbcbc;
+            margin-bottom: 0;
+            line-height: 1.3;
+        }
+
+        .nav-card-arrow {
+            color: #555555;
+            font-size: 0.9rem;
+            transition: all 0.2s;
+        }
+
+        .nav-card:hover .nav-card-arrow {
+            color: #ffffff;
+            transform: translateX(2px);
+        }
 
         /* Back Navigation Link */
-        .btn-back { background: transparent; color: #bcbcbc; border: none; font-family: 'Press Start 2P', monospace; font-size: 0.75rem; text-decoration: none; cursor: pointer; margin-bottom: 25px; display: inline-flex; align-items: center; gap: 8px; }
-        .btn-back:hover { color: #ffff00; }
+        .btn-back {
+            background: transparent;
+            color: #bcbcbc;
+            border: none;
+            font-family: 'Press Start 2P', monospace;
+            font-size: 0.75rem;
+            text-decoration: none;
+            cursor: pointer;
+            margin-bottom: 25px;
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+        }
 
-        .hidden { display: none !important; }
+        .btn-back:hover {
+            color: #ffff00;
+        }
+
+        /* Tutorial/Instruction Container */
+        .tutorial-box {
+            background: #000000;
+            border: 3px dashed #555555;
+            padding: 20px;
+            text-align: left;
+            margin-top: 15px;
+        }
+
+        .tutorial-box h3 {
+            font-family: 'Press Start 2P', monospace;
+            font-size: 0.85rem;
+            margin-bottom: 15px;
+            color: #ffff00;
+            text-align: center;
+        }
+
+        .tutorial-box ol {
+            color: #bcbcbc;
+            padding-left: 20px;
+            line-height: 1.6;
+        }
+
+        .tutorial-box li span {
+            color: #ffffff;
+            font-weight: bold;
+            text-decoration: underline;
+        }
+
+        /* Footer & Social Hubs */
+        footer {
+            margin-top: 25px;
+            border-top: 2px dashed #333333;
+            padding-top: 20px;
+        }
+
+        .footer-note {
+            font-family: 'Press Start 2P', monospace;
+            font-size: 0.65rem;
+            color: #555555;
+            margin-bottom: 15px;
+        }
+
+        .social-icons {
+            display: flex;
+            justify-content: center;
+            gap: 25px;
+        }
+
+        .social-icons a {
+            color: #bcbcbc;
+            font-size: 1.5rem;
+            transition: color 0.1s ease;
+        }
+
+        .social-icons a:hover {
+            color: #ffffff;
+        }
+
+        /* Setup Utility Classes */
+        .hidden {
+            display: none !important;
+        }
     </style>
 </head>
 <body>
 
+    <!-- Pixel Art Ambient Background Blocks -->
     <div class="pixel-bg-element p1"></div>
     <div class="pixel-bg-element p2"></div>
     <div class="pixel-bg-element p3"></div>
     <div class="pixel-bg-element p4"></div>
 
-    <!-- VIEW 1: HOME -->
+    <!-- VIEW 1: HUB/HOME PAGE -->
     <div id="view-home" class="retro-card">
+        
+        <!-- Generated Pixel Soul Hearts -->
+        <div class="logo-hearts-container">
+            <!-- Yellow Soul -->
+            <svg class="pixel-heart heart-yellow" viewBox="0 0 9 8" width="36" height="32" fill="currentColor">
+                <rect x="1" y="0" width="2" height="1"/><rect x="6" y="0" width="2" height="1"/>
+                <rect x="0" y="1" width="4" height="1"/><rect x="5" y="1" width="4" height="1"/>
+                <rect x="0" y="2" width="9" height="2"/>
+                <rect x="1" y="4" width="7" height="1"/><rect x="2" y="5" width="5" height="1"/>
+                <rect x="3" y="6" width="3" height="1"/><rect x="4" y="7" width="1" height="1"/>
+            </svg>
+            <!-- Red Soul -->
+            <svg class="pixel-heart heart-red" viewBox="0 0 9 8" width="36" height="32" fill="currentColor">
+                <rect x="1" y="0" width="2" height="1"/><rect x="6" y="0" width="2" height="1"/>
+                <rect x="0" y="1" width="4" height="1"/><rect x="5" y="1" width="4" height="1"/>
+                <rect x="0" y="2" width="9" height="2"/>
+                <rect x="1" y="4" width="7" height="1"/><rect x="2" y="5" width="5" height="1"/>
+                <rect x="3" y="6" width="3" height="1"/><rect x="4" y="7" width="1" height="1"/>
+            </svg>
+            <!-- Purple Soul -->
+            <svg class="pixel-heart heart-purple" viewBox="0 0 9 8" width="36" height="32" fill="currentColor">
+                <rect x="1" y="0" width="2" height="1"/><rect x="6" y="0" width="2" height="1"/>
+                <rect x="0" y="1" width="4" height="1"/><rect x="5" y="1" width="4" height="1"/>
+                <rect x="0" y="2" width="9" height="2"/>
+                <rect x="1" y="4" width="7" height="1"/><rect x="2" y="5" width="5" height="1"/>
+                <rect x="3" y="6" width="3" height="1"/><rect x="4" y="7" width="1" height="1"/>
+            </svg>
+        </div>
+
         <h1>Project Frisk</h1>
         <div class="subtitle">iOS Sideloader</div>
+        
+        <!-- Selection Board Matrix -->
         <div class="cards-container">
-            <a href="#dns" class="nav-card"><div class="nav-card-icon"><i class="fa-solid fa-shield-halved"></i></div><div class="nav-card-info"><h3>DNS Setup</h3><p>Block Apple revokes.</p></div></a>
-            <a href="#esign" class="nav-card"><div class="nav-card-icon"><i class="fa-solid fa-pen-nib"></i></div><div class="nav-card-info"><h3>ESign Install</h3><p>Code-signing access.</p></div></a>
-            <a href="#apps" class="nav-card"><div class="nav-card-icon"><i class="fa-solid fa-mobile-screen"></i></div><div class="nav-card-info"><h3>IPA Library</h3><p>Tweaked apps.</p></div></a>
-            <a href="#sign" class="nav-card"><div class="nav-card-icon"><i class="fa-solid fa-signature"></i></div><div class="nav-card-info"><h3>Sign IPA</h3><p>Automated cloud signing.</p></div></a>
+            
+            <!-- DNS Option -->
+            <a href="#dns" class="nav-card">
+                <div class="nav-card-icon"><i class="fa-solid fa-shield-halved"></i></div>
+                <div class="nav-card-info">
+                    <h3>DNS Setup</h3>
+                    <p>Block Apple's revoke servers securely.</p>
+                </div>
+                <div class="nav-card-arrow"><i class="fa-solid fa-chevron-right"></i></div>
+            </a>
+
+            <!-- ESign Hub Option -->
+            <a href="#esign" class="nav-card">
+                <div class="nav-card-icon"><i class="fa-solid fa-pen-nib"></i></div>
+                <div class="nav-card-info">
+                    <h3>ESign Install</h3>
+                    <p>Get mobile layout code-signing access.</p>
+                </div>
+                <div class="nav-card-arrow"><i class="fa-solid fa-chevron-right"></i></div>
+            </a>
+
+            <!-- Apps Hub Option -->
+            <a href="#apps" class="nav-card">
+                <div class="nav-card-icon"><i class="fa-solid fa-mobile-screen"></i></div>
+                <div class="nav-card-info">
+                    <h3>IPA Library</h3>
+                    <p>Get tweaked apps for ESign.</p>
+                </div>
+                <div class="nav-card-arrow"><i class="fa-solid fa-chevron-right"></i></div>
+            </a>
+
         </div>
+
+        <!-- Google AdSense Native Integration Block -->
+        <ins class="adsbygoogle"
+             style="display:block;margin:20px auto;"
+             data-ad-client="ca-pub-8693042848647942"
+             data-ad-slot="7228483826"
+             data-ad-format="auto"
+             data-full-width-responsive="true"></ins>
+        <script>
+             (adsbygoogle = window.adsbygoogle || []).push({});
+        </script>
+
+        <footer>
+            <div class="footer-note">Made in 2026</div>
+            <div class="social-icons">
+                <a href="YOUR_DISCORD_LINK" target="_blank"><i class="fa-brands fa-discord"></i></a>
+                <a href="YOUR_YOUTUBE_LINK" target="_blank"><i class="fa-brands fa-youtube"></i></a>
+            </div>
+        </footer>
     </div>
 
-    <!-- VIEW 2: DNS -->
+    <!-- VIEW 2: DNS SETUP ROUTE -->
     <div id="view-dns" class="retro-card hidden">
         <a href="#home" class="btn-back"><i class="fa-solid fa-arrow-left"></i> [ Back ]</a>
+        
         <h2>DNS Setup</h2>
-        <button onclick="window.open('https://github.com/char843vvv/qstaticdns/releases/download/dns/qstaticdns.mobileconfig', '_blank')" style="width: 100%; padding: 15px; background: #222; color: #fff; border: 3px solid #555; font-family: 'Press Start 2P', monospace; cursor: pointer;">INSTALL PROFILE</button>
+        <p>Install the Project Frisk DNS configuration matrix to bypass system certificate revokes safely.</p>
+        
+        <button onclick="window.open('https://www.mediafire.com/file/htf5xdb9tbn8izi/ProjectFriskDNS.mobileconfig/file', '_blank')" class="btn" style="display: block; width: 100%; padding: 15px; background: #222; color: #fff; border: 3px solid #555; font-family: 'Press Start 2P', monospace; cursor: pointer; transition: 0.2s;">
+            INSTALL PROFILE
+        </button>
+
+        <div class="tutorial-box">
+            <h3>How to Install</h3>
+            <ol>
+                <li>Click the configuration button above to open MediaFire.</li>
+                <li>Tap <span>Allow</span> when the system warning drops.</li>
+                <li>Open your native iOS <span>Settings</span> dashboard.</li>
+                <li>Tap <span>Profile Downloaded</span> near the header row.</li>
+                <li>Press <span>Install</span> in the top-right terminal corner.</li>
+            </ol>
+        </div>
+        
+        <footer>
+            <div class="footer-note">Made in 2026</div>
+        </footer>
     </div>
 
-    <!-- VIEW 3: ESIGN -->
+    <!-- VIEW 3: ESIGN REPOSITORY ROUTE -->
     <div id="view-esign" class="retro-card hidden">
         <a href="#home" class="btn-back"><i class="fa-solid fa-arrow-left"></i> [ Back ]</a>
+        
         <h2>ESign Install</h2>
+        <p>Deploy custom installation environments wirelessly to your device.</p>
+        
         <div class="cards-container">
-            <!-- ESign list items here -->
+            <!-- Original Entries -->
+            <a href="itms-services://?action=download-manifest&url=https://clatechteams.github.io/esign/plists/utdectxvchbd.plist" class="nav-card">
+                <img src="esign.png" class="nav-card-img" alt="ESign Logo">
+                <div class="nav-card-info">
+                    <h3>Jiangsu Simcere</h3>
+                    <p style="color: #ff5555;">Revoked 🔴 use project frisk dns</p>
+                </div>
+                <div class="nav-card-arrow"><i class="fa-solid fa-download"></i></div>
+            </a>
+            <a href="itms-services://?action=download-manifest&url=https://clatechteams.github.io/esign/plists/gyuagxubbgit.plist" class="nav-card">
+                <img src="esign.png" class="nav-card-img" alt="ESign Logo">
+                <div class="nav-card-info">
+                    <h3>Jsangsu V1</h3>
+                    <p style="color: #ff5555;">Revoked 🔴 use project frisk dns</p>
+                </div>
+                <div class="nav-card-arrow"><i class="fa-solid fa-download"></i></div>
+            </a>
+            <a href="itms-services://?action=download-manifest&url=https://clatechteams.github.io/esign/plists/njbibblmdyti.plist" class="nav-card">
+                <img src="esign.png" class="nav-card-img" alt="ESign Logo">
+                <div class="nav-card-info">
+                    <h3>Viet Nam Rubber</h3>
+                    <p style="color: #ff5555;">Revoked 🔴 use project frisk dns</p>
+                </div>
+                <div class="nav-card-arrow"><i class="fa-solid fa-download"></i></div>
+            </a>
+            <a href="itms-services://?action=download-manifest&url=https://clatechteams.github.io/esign/plists/yeupycohvkra.plist" class="nav-card">
+                <img src="esign.png" class="nav-card-img" alt="ESign Logo">
+                <div class="nav-card-info">
+                    <h3>Moving Increasingly</h3>
+                    <p style="color: #ff5555;">Revoked 🔴 use project frisk dns</p>
+                </div>
+                <div class="nav-card-arrow"><i class="fa-solid fa-download"></i></div>
+            </a>
+            <a href="itms-services://?action=download-manifest&url=https://clatechteams.github.io/esign/plists/rzgvsvzqrqhy.plist" class="nav-card">
+                <img src="esign.png" class="nav-card-img" alt="ESign Logo">
+                <div class="nav-card-info">
+                    <h3>CHINA teleccom</h3>
+                    <p style="color: #ff5555;">Revoked 🔴 use project frisk dns</p>
+                </div>
+                <div class="nav-card-arrow"><i class="fa-solid fa-download"></i></div>
+            </a>
+            <a href="itms-services://?action=download-manifest&url=https://clatechteams.github.io/esign/plists/yebvvihyglrg.plist" class="nav-card">
+                <img src="esign.png" class="nav-card-img" alt="ESign Logo">
+                <div class="nav-card-info">
+                    <h3>VIETNAM AIRLINES</h3>
+                    <p style="color: #ff5555;">Revoked 🔴 use project frisk dns</p>
+                </div>
+                <div class="nav-card-arrow"><i class="fa-solid fa-download"></i></div>
+            </a>
+            <a href="itms-services://?action=download-manifest&url=https://clatechteams.github.io/esign/plists/uphpmtulysio.plist" class="nav-card">
+                <img src="esign.png" class="nav-card-img" alt="ESign Logo">
+                <div class="nav-card-info">
+                    <h3>Beijing Xibei</h3>
+                    <p style="color: #ff5555;">Revoked 🔴 use project frisk dns</p>
+                </div>
+                <div class="nav-card-arrow"><i class="fa-solid fa-download"></i></div>
+            </a>
+            <a href="itms-services://?action=download-manifest&url=https://clatechteams.github.io/esign/plists/edhlghaspbzm.plist" class="nav-card">
+                <img src="esign.png" class="nav-card-img" alt="ESign Logo">
+                <div class="nav-card-info">
+                    <h3>Qingdao Rural</h3>
+                    <p style="color: #ff5555;">Revoked 🔴 use project frisk dns</p>
+                </div>
+                <div class="nav-card-arrow"><i class="fa-solid fa-download"></i></div>
+            </a>
+            <a href="itms-services://?action=download-manifest&url=https://clatechteams.github.io/esign/plists/eebvankfrvtr.plist" class="nav-card">
+                <img src="esign.png" class="nav-card-img" alt="ESign Logo">
+                <div class="nav-card-info">
+                    <h3>Luoyang Postal</h3>
+                    <p style="color: #ff5555;">Revoked 🔴 use project frisk dns</p>
+                </div>
+                <div class="nav-card-arrow"><i class="fa-solid fa-download"></i></div>
+            </a>
+            <a href="itms-services://?action=download-manifest&url=https://clatechteams.github.io/esign/plists/wqcwugdmzxmq.plist" class="nav-card">
+                <img src="esign.png" class="nav-card-img" alt="ESign Logo">
+                <div class="nav-card-info">
+                    <h3>Commission Elections</h3>
+                    <p style="color: #ff5555;">Revoked 🔴 use project frisk dns</p>
+                </div>
+                <div class="nav-card-arrow"><i class="fa-solid fa-download"></i></div>
+            </a>
+
+            <!-- New Entries -->
+            <a href="itms-services://?action=download-manifest&url=https://clatechteams.github.io/esign/plists/hvkwemegxskv.plist" class="nav-card">
+                <img src="esign.png" class="nav-card-img" alt="ESign Logo">
+                <div class="nav-card-info">
+                    <h3>Moving Increasingly V2</h3>
+                    <p style="color: #ff5555;">Revoked 🔴 use project frisk dns</p>
+                </div>
+                <div class="nav-card-arrow"><i class="fa-solid fa-download"></i></div>
+            </a>
+            <a href="itms-services://?action=download-manifest&url=https://clatechteams.github.io/esign/plists/dovzsnqpdghi.plist" class="nav-card">
+                <img src="esign.png" class="nav-card-img" alt="ESign Logo">
+                <div class="nav-card-info">
+                    <h3>VN V1</h3>
+                    <p style="color: #ff5555;">Revoked 🔴 use project frisk dns</p>
+                </div>
+                <div class="nav-card-arrow"><i class="fa-solid fa-download"></i></div>
+            </a>
+            <a href="itms-services://?action=download-manifest&url=https://clatechteams.github.io/esign/plists/hfrolxroghlk.plist" class="nav-card">
+                <img src="esign.png" class="nav-card-img" alt="ESign Logo">
+                <div class="nav-card-info">
+                    <h3>VN V2</h3>
+                    <p style="color: #ff5555;">Revoked 🔴 use project frisk dns</p>
+                </div>
+                <div class="nav-card-arrow"><i class="fa-solid fa-download"></i></div>
+            </a>
+            <a href="itms-services://?action=download-manifest&url=https://clatechteams.github.io/esign/plists/cgeixnzlcdje.plist" class="nav-card">
+                <img src="esign.png" class="nav-card-img" alt="ESign Logo">
+                <div class="nav-card-info">
+                    <h3>CHINA V1</h3>
+                    <p style="color: #ff5555;">Revoked 🔴 use project frisk dns</p>
+                </div>
+                <div class="nav-card-arrow"><i class="fa-solid fa-download"></i></div>
+            </a>
+            <a href="itms-services://?action=download-manifest&url=https://clatechteams.github.io/esign/plists/xcggyxfpgggi.plist" class="nav-card">
+                <img src="esign.png" class="nav-card-img" alt="ESign Logo">
+                <div class="nav-card-info">
+                    <h3>National Oilwell</h3>
+                    <p style="color: #ff5555;">Revoked 🔴 use project frisk dns</p>
+                </div>
+                <div class="nav-card-arrow"><i class="fa-solid fa-download"></i></div>
+            </a>
+            <a href="itms-services://?action=download-manifest&url=https://clatechteams.github.io/esign/plists/bdgcjscvqsbt.plist" class="nav-card">
+                <img src="esign.png" class="nav-card-img" alt="ESign Logo">
+                <div class="nav-card-info">
+                    <h3>Beijing Zhizhangyi</h3>
+                    <p style="color: #ff5555;">Revoked 🔴 use project frisk dns</p>
+                </div>
+                <div class="nav-card-arrow"><i class="fa-solid fa-download"></i></div>
+            </a>
+            <a href="itms-services://?action=download-manifest&url=https://clatechteams.github.io/esign/plists/lkngwjbeqcmc.plist" class="nav-card">
+                <img src="esign.png" class="nav-card-img" alt="ESign Logo">
+                <div class="nav-card-info">
+                    <h3>GLOBAL TAKEOFF</h3>
+                    <p style="color: #ff5555;">Revoked 🔴 use project frisk dns</p>
+                </div>
+                <div class="nav-card-arrow"><i class="fa-solid fa-download"></i></div>
+            </a>
+            <a href="itms-services://?action=download-manifest&url=https://clatechteams.github.io/esign/plists/sitpxpluvkkg.plist" class="nav-card">
+                <img src="esign.png" class="nav-card-img" alt="ESign Logo">
+                <div class="nav-card-info">
+                    <h3>Aramco</h3>
+                    <p style="color: #ff5555;">Revoked 🔴 use project frisk dns</p>
+                </div>
+                <div class="nav-card-arrow"><i class="fa-solid fa-download"></i></div>
+            </a>
+            <a href="itms-services://?action=download-manifest&url=https://clatechteams.github.io/esign/plists/xvsplcelsqyf.plist" class="nav-card">
+                <img src="esign.png" class="nav-card-img" alt="ESign Logo">
+                <div class="nav-card-info">
+                    <h3>BOC</h3>
+                    <p style="color: #ff5555;">Revoked 🔴 use project frisk dns</p>
+                </div>
+                <div class="nav-card-arrow"><i class="fa-solid fa-download"></i></div>
+            </a>
+            <a href="itms-services://?action=download-manifest&url=https://clatechteams.github.io/esign/plists/dvrftopxguuy.plist" class="nav-card">
+                <img src="esign.png" class="nav-card-img" alt="ESign Logo">
+                <div class="nav-card-info">
+                    <h3>GLOBAL V1</h3>
+                    <p style="color: #ff5555;">Revoked 🔴 use project frisk dns</p>
+                </div>
+                <div class="nav-card-arrow"><i class="fa-solid fa-download"></i></div>
+            </a>
+            <a href="itms-services://?action=download-manifest&url=https://clatechteams.github.io/esign/plists/dvrftopxguuy.plist" class="nav-card">
+                <img src="esign.png" class="nav-card-img" alt="ESign Logo">
+                <div class="nav-card-info">
+                    <h3>GLOBAL V2</h3>
+                    <p style="color: #ff5555;">Revoked 🔴 use project frisk dns</p>
+                </div>
+                <div class="nav-card-arrow"><i class="fa-solid fa-download"></i></div>
+            </a>
+            <a href="itms-services://?action=download-manifest&url=https://clatechteams.github.io/esign/plists/fikcussmdjpw.plist" class="nav-card">
+                <img src="esign.png" class="nav-card-img" alt="ESign Logo">
+                <div class="nav-card-info">
+                    <h3>BOC V3</h3>
+                    <p style="color: #ff5555;">Revoked 🔴 use project frisk dns</p>
+                </div>
+                <div class="nav-card-arrow"><i class="fa-solid fa-download"></i></div>
+            </a>
+            <a href="itms-services://?action=download-manifest&url=https://clatechteams.github.io/esign/plists/tljfczgvozuj.plist" class="nav-card">
+                <img src="esign.png" class="nav-card-img" alt="ESign Logo">
+                <div class="nav-card-info">
+                    <h3>BOC V1</h3>
+                    <p style="color: #ff5555;">Revoked 🔴 use project frisk dns</p>
+                </div>
+                <div class="nav-card-arrow"><i class="fa-solid fa-download"></i></div>
+            </a>
+            <a href="itms-services://?action=download-manifest&url=https://clatechteams.github.io/esign/plists/uukebkjjkcag.plist" class="nav-card">
+                <img src="esign.png" class="nav-card-img" alt="ESign Logo">
+                <div class="nav-card-info">
+                    <h3>BOC V2</h3>
+                    <p style="color: #ff5555;">Revoked 🔴 use project frisk dns</p>
+                </div>
+                <div class="nav-card-arrow"><i class="fa-solid fa-download"></i></div>
+            </a>
+            <a href="itms-services://?action=download-manifest&url=https://clatechteams.github.io/esign/plists/axaaluymvglb.plist" class="nav-card">
+                <img src="esign.png" class="nav-card-img" alt="ESign Logo">
+                <div class="nav-card-info">
+                    <h3>PowerChina</h3>
+                    <p style="color: #ff5555;">Revoked 🔴 use project frisk dns</p>
+                </div>
+                <div class="nav-card-arrow"><i class="fa-solid fa-download"></i></div>
+            </a>
+            <a href="itms-services://?action=download-manifest&url=https://clatechteams.github.io/esign/plists/hdgauajursgy.plist" class="nav-card">
+                <img src="esign.png" class="nav-card-img" alt="ESign Logo">
+                <div class="nav-card-info">
+                    <h3>PowerChina V1</h3>
+                    <p style="color: #ff5555;">Revoked 🔴 use project frisk dns</p>
+                </div>
+                <div class="nav-card-arrow"><i class="fa-solid fa-download"></i></div>
+            </a>
+            <a href="itms-services://?action=download-manifest&url=https://clatechteams.github.io/esign/plists/ecuforbthiax.plist" class="nav-card">
+                <img src="esign.png" class="nav-card-img" alt="ESign Logo">
+                <div class="nav-card-info">
+                    <h3>PowerChina V2</h3>
+                    <p style="color: #ff5555;">Revoked 🔴 use project frisk dns</p>
+                </div>
+                <div class="nav-card-arrow"><i class="fa-solid fa-download"></i></div>
+            </a>
+            <a href="itms-services://?action=download-manifest&url=https://clatechteams.github.io/esign/plists/snjbrycylbai.plist" class="nav-card">
+                <img src="esign.png" class="nav-card-img" alt="ESign Logo">
+                <div class="nav-card-info">
+                    <h3>PowerChina V3</h3>
+                    <p style="color: #ff5555;">Revoked 🔴 use project frisk dns</p>
+                </div>
+                <div class="nav-card-arrow"><i class="fa-solid fa-download"></i></div>
+            </a>
+            <a href="itms-services://?action=download-manifest&url=https://clatechteams.github.io/esign/plists/cnfigsmdncea.plist" class="nav-card">
+                <img src="esign.png" class="nav-card-img" alt="ESign Logo">
+                <div class="nav-card-info">
+                    <h3>PowerChina V4</h3>
+                    <p style="color: #ff5555;">Revoked 🔴 use project frisk dns</p>
+                </div>
+                <div class="nav-card-arrow"><i class="fa-solid fa-download"></i></div>
+            </a>
         </div>
+        
+        <div class="tutorial-box">
+            <h3>Installation Guide</h3>
+            <ol>
+                <li>Tap one of the active <span>ESign</span> selection cards listed above.</li>
+                <li>When your mobile browser displays the installation query, choose <span>Install</span>.</li>
+                <li>Exit to your device <span>Home Screen</span> to monitor layout tracking progress.</li>
+                <li>If prompted with an "Untrusted Enterprise Developer" alert, go to your system dashboard under <span>Settings -> General -> VPN & Device Management</span> to grant trust permission.</li>
+            </ol>
+        </div>
+        
+        <footer>
+            <div class="footer-note">Made in 2026</div>
+        </footer>
     </div>
 
-    <!-- VIEW 4: APPS -->
+    <!-- VIEW 4: APPS REPOSITORY ROUTE -->
     <div id="view-apps" class="retro-card hidden">
         <a href="#home" class="btn-back"><i class="fa-solid fa-arrow-left"></i> [ Back ]</a>
+        
         <h2>IPA Library</h2>
+        <p>Tap any app below to copy its direct download URL. Paste the URL inside ESign to download and sign it.</p>
+        
         <div class="cards-container">
+            
+            <!-- App Card: Spotify+++ -->
             <div class="nav-card" onclick="copyIpaLink(this, 'https://file.ipaomtk.com/Spotify/Spotify-2-IPAOMTK.COM.ipa')">
-                <div class="nav-card-info"><h3>Spotify+++</h3><p>Premium Unlocked</p></div>
+                <img src="Spotify.png" class="nav-card-img" style="background: transparent; border: none; padding: 4px;" alt="Spotify Logo">
+                <div class="nav-card-info">
+                    <h3>Spotify+++</h3>
+                    <p style="color: #55ff55;">Premium Unlocked</p>
+                </div>
                 <div class="nav-card-arrow status-icon"><i class="fa-regular fa-copy"></i></div>
             </div>
+
+            <!-- App Card: Delta Executor -->
+            <div class="nav-card" onclick="copyIpaLink(this, 'Https://cdn.glopdelivery.com/file/Delta-2.727.1199.ipa')">
+                <img src="Delta.png" class="nav-card-img" style="background: transparent; border: none; padding: 4px;" alt="Delta Logo">
+                <div class="nav-card-info">
+                    <h3>Delta Executor</h3>
+                    <p style="color: #ffff00;">v2.727.1199</p>
+                </div>
+                <div class="nav-card-arrow status-icon"><i class="fa-regular fa-copy"></i></div>
+            </div>
+
         </div>
+        
+        <div class="tutorial-box">
+            <h3>How to Install via ESign</h3>
+            <ol>
+                <li>Tap an app above to <span>Copy</span> its link to your clipboard.</li>
+                <li>Open your installed <span>ESign</span> application.</li>
+                <li>Navigate to the <span>Download</span> tab at the bottom.</li>
+                <li>Tap the <span>+</span> (plus) button in the top right and paste the link.</li>
+                <li>Once the download finishes, go to the <span>Apps</span> tab, select the file, and press <span>Signature</span> to build it.</li>
+            </ol>
+        </div>
+        
+        <footer>
+            <div class="footer-note">Made in 2026</div>
+        </footer>
     </div>
 
-    <!-- VIEW 5: SIGN IPA -->
-    <div id="view-sign" class="retro-card hidden">
-        <a href="#home" class="btn-back"><i class="fa-solid fa-arrow-left"></i> [ Back ]</a>
-        <h2>Sign IPA</h2>
-        
-        <div style="text-align: left; margin-bottom: 15px;">
-            <p style="font-size: 0.8rem; margin-bottom: 5px;">1. IPA Link (Direct URL)</p>
-            <input type="url" id="ipaUrl" placeholder="https://example.com/app.ipa" style="width: 100%; padding: 10px; background: #111; color: #fff; border: 1px solid #555;">
-        </div>
-
-        <div style="text-align: left; margin-bottom: 15px;">
-            <p style="font-size: 0.8rem; margin-bottom: 5px;">2. Certificate (.p12)</p>
-            <input type="file" id="p12File" accept=".p12" style="width: 100%; background: #111; color: #fff; border: 1px solid #555; padding: 5px;">
-        </div>
-
-        <div style="text-align: left; margin-bottom: 15px;">
-            <p style="font-size: 0.8rem; margin-bottom: 5px;">3. Provisioning Profile</p>
-            <input type="file" id="provisionFile" accept=".mobileprovision" style="width: 100%; background: #111; color: #fff; border: 1px solid #555; padding: 5px;">
-        </div>
-
-        <div style="text-align: left; margin-bottom: 20px;">
-            <p style="font-size: 0.8rem; margin-bottom: 5px;">4. Cert Password</p>
-            <input type="password" id="p12Pass" placeholder="Password" style="width: 100%; padding: 10px; background: #111; color: #fff; border: 1px solid #555;">
-        </div>
-
-        <button id="signBtn" onclick="processAndSign()" style="width: 100%; padding: 15px; background: #fff; color: #000; font-family: 'Press Start 2P'; cursor: pointer;">SIGN & INSTALL</button>
-        
-        <p id="statusText" style="margin-top: 15px; font-size: 0.8rem; color: #ffff00; line-height: 1.4;"></p>
-    </div>
-
+    <!-- JAVASCRIPT: ROUTING & CLIPBOARD LOGIC -->
     <script>
+        // Copy to Clipboard Utility Function
         function copyIpaLink(element, url) {
             navigator.clipboard.writeText(url).then(() => {
                 const iconDiv = element.querySelector('.status-icon');
                 const originalHTML = iconDiv.innerHTML;
+                
+                // Swap to a success checkmark briefly
                 iconDiv.innerHTML = '<i class="fa-solid fa-check" style="color: #55ff55;"></i>';
-                setTimeout(() => { iconDiv.innerHTML = originalHTML; }, 1500);
+                
+                setTimeout(() => {
+                    iconDiv.innerHTML = originalHTML;
+                }, 1500);
+            }).catch(err => {
+                alert("Failed to copy link. Make sure you are using a secure browser.");
+                console.error(err);
             });
         }
 
-        function getBase64(file) {
-            return new Promise((resolve, reject) => {
-                const reader = new FileReader();
-                reader.readAsDataURL(file);
-                reader.onload = () => {
-                    let encoded = reader.result.toString().replace(/^data:(.*,)?/, '');
-                    if ((encoded.length % 4) > 0) encoded += '='.repeat(4 - (encoded.length % 4));
-                    resolve(encoded);
-                };
-                reader.onerror = error => reject(error);
-            });
-        }
-
-        async function processAndSign() {
-            // --- CONFIGURATION ---
-            const OWNER = "ProjectFrisk";
-            const REPO = "ProjectFrisk";
-            const TOKEN = "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";
-            const WORKFLOW_ID = "sign.yml"; 
-            // ---------------------
-
-            const ipaUrl = document.getElementById('ipaUrl').value;
-            const p12File = document.getElementById('p12File').files[0];
-            const provisionFile = document.getElementById('provisionFile').files[0];
-            const p12Pass = document.getElementById('p12Pass').value;
-            const statusText = document.getElementById('statusText');
-            const signBtn = document.getElementById('signBtn');
-
-            if (!ipaUrl || !p12File || !provisionFile || !p12Pass) {
-                statusText.innerText = "Error: Fill out all fields and upload both files.";
-                statusText.style.color = "#ff5555";
-                return;
-            }
-
-            statusText.innerText = "Packaging files...";
-            statusText.style.color = "#ffff00";
-            signBtn.disabled = true;
-            signBtn.style.opacity = "0.5";
-
-            try {
-                const p12Base64 = await getBase64(p12File);
-                const provBase64 = await getBase64(provisionFile);
-
-                statusText.innerText = "Sending to signing server...";
-
-                const response = await fetch(`https://api.github.com/repos/${OWNER}/${REPO}/actions/workflows/${WORKFLOW_ID}/dispatches`, {
-                    method: 'POST',
-                    headers: {
-                        'Authorization': `Bearer ${TOKEN}`,
-                        'Accept': 'application/vnd.github.v3+json',
-                        'Content-Type': 'application/json'
-                    },
-                    body: JSON.stringify({
-                        ref: 'main',
-                        inputs: { 
-                            ipa_url: ipaUrl, 
-                            password: p12Pass, 
-                            p12_base64: p12Base64, 
-                            mobileprovision_base64: provBase64 
-                        }
-                    })
-                });
-
-                if (response.ok) {
-                    statusText.innerHTML = "Signing Started! ⏳<br><br>Wait ~2 minutes, then go to your repository's <b>Actions</b> tab on GitHub. Click the workflow run to find your direct Install Link.";
-                    statusText.style.color = "#55ff55";
-                } else {
-                    const error = await response.json();
-                    statusText.innerText = "Error triggering workflow: " + error.message;
-                    statusText.style.color = "#ff5555";
-                }
-            } catch (err) {
-                statusText.innerText = "Failed to connect to GitHub API.";
-                statusText.style.color = "#ff5555";
-            } finally {
-                signBtn.disabled = false;
-                signBtn.style.opacity = "1";
-            }
-        }
-
+        // Hash-Routing Function
         function handleRouting() {
             const hash = window.location.hash;
-            const views = [document.getElementById('view-home'), document.getElementById('view-dns'), document.getElementById('view-esign'), document.getElementById('view-apps'), document.getElementById('view-sign')];
-            views.forEach(v => v.classList.add('hidden'));
             
-            if (hash === '#dns') document.getElementById('view-dns').classList.remove('hidden');
-            else if (hash === '#esign') document.getElementById('view-esign').classList.remove('hidden');
-            else if (hash === '#apps') document.getElementById('view-apps').classList.remove('hidden');
-            else if (hash === '#sign') document.getElementById('view-sign').classList.remove('hidden');
-            else document.getElementById('view-home').classList.remove('hidden');
+            const homeView = document.getElementById('view-home');
+            const dnsView = document.getElementById('view-dns');
+            const esignView = document.getElementById('view-esign');
+            const appsView = document.getElementById('view-apps');
+            
+            // Terminate all visible tracks
+            homeView.classList.add('hidden');
+            dnsView.classList.add('hidden');
+            esignView.classList.add('hidden');
+            appsView.classList.add('hidden');
+            
+            // Map incoming target views
+            if (hash === '#dns') {
+                dnsView.classList.remove('hidden');
+            } else if (hash === '#esign') {
+                esignView.classList.remove('hidden');
+            } else if (hash === '#apps') {
+                appsView.classList.remove('hidden');
+            } else {
+                homeView.classList.remove('hidden');
+            }
         }
 
+        // Initialize event listeners
         window.addEventListener('hashchange', handleRouting);
         window.addEventListener('load', handleRouting);
     </script>
+
 </body>
 </html>
