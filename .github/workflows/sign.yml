@@ -1,0 +1,43 @@
+name: Sign IPA
+on:
+  workflow_dispatch:
+    inputs:
+      ipa_url:
+        description: 'URL of the IPA file'
+        required: true
+      p12_base64:
+        description: 'P12 Certificate (Base64)'
+        required: true
+      mobileprovision_base64:
+        description: 'Mobileprovision file (Base64)'
+        required: true
+      password:
+        description: 'P12 Password'
+        required: true
+
+jobs:
+  sign:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout Code
+        uses: actions/checkout@v3
+
+      - name: Install zsign
+        run: |
+          sudo apt-get update
+          sudo apt-get install -y libzip-dev openssl build-essential
+          git clone https://github.com/zh-explorer/zsign.git
+          cd zsign && make && sudo cp zsign /usr/local/bin/
+
+      - name: Process Signing
+        run: |
+          echo "${{ inputs.p12_base64 }}" | base64 -d > certificate.p12
+          echo "${{ inputs.mobileprovision_base64 }}" | base64 -d > profile.mobileprovision
+          wget -O app.ipa "${{ inputs.ipa_url }}"
+          zsign -k certificate.p12 -p "${{ inputs.password }}" -m profile.mobileprovision -o signed.ipa app.ipa
+
+      - name: Upload Signed IPA
+        uses: actions/upload-artifact@v4
+        with:
+          name: SignedIPA
+          path: signed.ipa
