@@ -1,43 +1,108 @@
-name: Sign IPA
+name: Cloud Sign IPA
+
 on:
   workflow_dispatch:
     inputs:
       ipa_url:
-        description: 'URL of the IPA file'
+        description: 'Direct link to the IPA'
         required: true
+        type: string
       p12_base64:
-        description: 'P12 Certificate (Base64)'
+        description: 'Base64 encoded .p12 certificate'
         required: true
+        type: string
       mobileprovision_base64:
-        description: 'Mobileprovision file (Base64)'
+        description: 'Base64 encoded .mobileprovision file'
         required: true
+        type: string
       password:
-        description: 'P12 Password'
+        description: 'Password for the .p12 certificate'
         required: true
+        type: string
+
+# Required to create a temporary release for hosting the signed IPA
+permissions:
+  contents: write
 
 jobs:
-  sign:
+  sign-and-host:
     runs-on: ubuntu-latest
     steps:
-      - name: Checkout Code
-        uses: actions/checkout@v3
+      - name: Checkout Repository
+        uses: actions/checkout@v4
 
-      - name: Install zsign
+      - name: Decode Certificates & Download IPA
+        run: |
+          echo "${{ github.event.inputs.p12_base64 }}" | base64 -d > cert.p12
+          echo "${{ github.event.inputs.mobileprovision_base64 }}" | base64 -d > profile.mobileprovision
+          curl -L "${{ github.event.inputs.ipa_url }}" -o app.ipa
+
+      - name: Install zsign (Open Source iOS Signer)
         run: |
           sudo apt-get update
-          sudo apt-get install -y libzip-dev openssl build-essential
-          git clone https://github.com/zh-explorer/zsign.git
-          cd zsign && make && sudo cp zsign /usr/local/bin/
+          sudo apt-get install -y zip unzip libssl-dev
+          git clone https://github.com/zhlynn/zsign.git
+          cd zsign
+          g++ *.cpp common/*.cpp openssl/*.cpp -lcrypto -O3 -o zsign
+          cd ..
 
-      - name: Process Signing
+      - name: Sign the IPA
         run: |
-          echo "${{ inputs.p12_base64 }}" | base64 -d > certificate.p12
-          echo "${{ inputs.mobileprovision_base64 }}" | base64 -d > profile.mobileprovision
-          wget -O app.ipa "${{ inputs.ipa_url }}"
-          zsign -k certificate.p12 -p "${{ inputs.password }}" -m profile.mobileprovision -o signed.ipa app.ipa
+          ./zsign/zsign -k cert.p12 -p '${{ github.event.inputs.password }}' -m profile.mobileprovision -o signed_app.ipa app.ipa
 
-      - name: Upload Signed IPA
-        uses: actions/upload-artifact@v4
-        with:
-          name: SignedIPA
-          path: signed.ipa
+      - name: Generate Manifest and Release
+        id: deploy
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        run: |
+          # Generate a unique tag for this build
+          TAG="signed-$(date +%s)"
+          
+          # GitHub Release download URLs
+          IPA_URL="https://github.com/${{ github.repository }}/releases/download/$TAG/signed_app.ipa"
+          
+          # Create the manifest.plist required for iOS installation
+          cat <<EOF > manifest.plist
+          <?xml version="1.0" encoding="UTF-8"?>
+          <!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+          <plist version="1.0">
+          <dict>
+              <key>items</key>
+              <array>
+                  <dict>
+                      <key>assets</key>
+                      <array>
+                          <dict>
+                              <key>kind</key>
+                              <string>software-package</string>
+                              <key>url</key>
+                              <string>$IPA_URL</string>
+                          </dict>
+                      </array>
+                      <key>metadata</key>
+                      <dict>
+                          <key>bundle-identifier</key>
+                          <string>com.projectfrisk.signedapp</string>
+                          <key>bundle-version</key>
+                          <string>1.0</string>
+                          <key>kind</key>
+                          <string>software</string>
+                          <key>title</key>
+                          <string>Signed App</string>
+                      </dict>
+                  </dict>
+              </array>
+          </dict>
+          </plist>
+          EOF
+          
+          # Upload the signed IPA and manifest to a new GitHub Release
+          gh release create "$TAG" signed_app.ipa manifest.plist --title "Signed IPA - $TAG" --notes "Automated signed build."
+          
+          # Generate the final clickable install link
+          PLIST_URL="https://github.com/${{ github.repository }}/releases/download/$TAG/manifest.plist"
+          INSTALL_LINK="itms-services://?action=download-manifest&url=$PLIST_URL"
+          
+          # Print the link to the GitHub Actions Summary page
+          echo "### 🚀 Signing Complete!" >> $GITHUB_STEP_SUMMARY
+          echo "[**TAP HERE TO INSTALL SIGNED APP**]($INSTALL_LINK)" >> $GITHUB_STEP_SUMMARY
